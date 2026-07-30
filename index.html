@@ -164,7 +164,25 @@ table{border-collapse:collapse;width:100%;min-width:760px;font-size:12.5px}
 th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;background:var(--panel)}
 tr:last-child td{border-bottom:0}
-td.formula{font-size:11.5px;color:var(--muted);word-break:break-word}
+td.metric{color:var(--ink);font-weight:700}
+td.den2{color:var(--muted)}
+td.rule2{color:var(--muted)}
+th:first-child,td:first-child{width:34px;color:#5f6b58}
+/* On a phone a five-column table can only scroll sideways, so it stops being a
+   table and becomes one block per metric, each cell labelled by its header. */
+@media (max-width:720px){
+  .tablewrap{overflow-x:visible}
+  table{min-width:0}
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  tr{display:block;padding:14px 0;border-bottom:1px solid var(--line)}
+  tr:last-child{border-bottom:0}
+  td{display:block;border:0;padding:2px 16px}
+  td:first-child{display:none}
+  td.metric{font-size:14px;padding-bottom:6px}
+  td.val{padding-top:8px;font-size:15px}
+  td.den2::before,td.rule2::before{content:attr(data-label-ru);display:block;
+    font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6f7a68;margin-top:8px}
+}
 td.val{color:var(--accent);white-space:nowrap;font-weight:700}
 
 /* ─── cards ─────────────────────────────────────────────────────────── */
@@ -388,7 +406,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
       </div>
       <p class="eyebrow" data-ru="выборка · знаменатель · правило сравнения" data-en="sample · denominator · comparison rule">выборка · знаменатель · правило сравнения</p>
     </div>
-    <p class="lead" style="margin:0 0 26px" data-ru="У каждого результата зафиксированы выборка, знаменатель и правило сравнения. Публичные репозитории воспроизводят эти расчёты и контроль качества на синтетике." data-en="Every result has a fixed sample, denominator and comparison rule. Public repositories reproduce these calculations and quality controls on synthetic data.">У каждого результата зафиксированы выборка, знаменатель и правило сравнения. Публичные репозитории воспроизводят эти расчёты и контроль качества на синтетике.</p>
+    <p class="lead" style="margin:0 0 26px" data-ru="У каждого результата зафиксированы знаменатель и правило сравнения — без них цифра ничего не значит. Публичные репозитории воспроизводят эти расчёты и контроль качества на синтетике." data-en="Every result has a fixed denominator and comparison rule — without them a figure means nothing. Public repositories reproduce these calculations and quality controls on synthetic data.">У каждого результата зафиксированы знаменатель и правило сравнения — без них цифра ничего не значит. Публичные репозитории воспроизводят эти расчёты и контроль качества на синтетике.</p>
 
     <div class="tablewrap">
       <table>
@@ -396,40 +414,46 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
           <tr>
             <th>№</th>
             <th data-ru="метрика" data-en="metric">метрика</th>
-            <th data-ru="формула и правило" data-en="formula and rule">формула и правило</th>
+            <th data-ru="знаменатель" data-en="denominator">знаменатель</th>
+            <th data-ru="правило сравнения" data-en="comparison rule">правило сравнения</th>
             <th data-ru="значение" data-en="value">значение</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>01</td>
-            <td data-ru="Покрытие оценкой" data-en="Evaluation coverage">Покрытие оценкой</td>
-            <td class="formula">evaluated_conversations / conversations_passing(duration_filter ∧ content_filter)</td>
-            <td class="val">100% / ≤20%</td>
+            <td class="metric" data-label-ru="метрика" data-label-en="metric" data-ru="Покрытие оценкой" data-en="Evaluation coverage">Покрытие оценкой</td>
+            <td class="den2" data-label-ru="знаменатель" data-label-en="denominator" data-ru="Диалоги, прошедшие фильтр длительности и содержания" data-en="Conversations that pass the duration and content filter">Диалоги, прошедшие фильтр длительности и содержания</td>
+            <td class="rule2" data-label-ru="правило" data-label-en="rule" data-ru="Сколько из них оценивается автоматически — против ручной выборки прежнего процесса" data-en="How many of them are scored automatically — against the manual sample of the old process">Сколько из них оценивается автоматически — против ручной выборки прежнего процесса</td>
+            <td class="val" data-label-ru="значение" data-label-en="value" data-ru="100% / ≤20%" data-en="100% / ≤20%">100% / ≤20%</td>
           </tr>
           <tr>
             <td>02</td>
-            <td data-ru="Совпадение решений" data-en="Decision agreement">Совпадение решений</td>
-            <td class="formula" data-ru="model_decision == frozen_golden_set(expert_adjudicated, n=500 сделок); критический recall и классы ошибок контролируются отдельно" data-en="model_decision == frozen_golden_set(expert_adjudicated, n=500 deals); critical recall and error classes are tracked separately">model_decision == frozen_golden_set(expert_adjudicated, n=500 сделок); критический recall и классы ошибок контролируются отдельно</td>
-            <td class="val">98%</td>
+            <td class="metric" data-label-ru="метрика" data-label-en="metric" data-ru="Совпадение решений" data-en="Decision agreement">Совпадение решений</td>
+            <td class="den2" data-label-ru="знаменатель" data-label-en="denominator" data-ru="500 сделок замороженного набора, размеченных экспертами" data-en="500 deals in a frozen set, adjudicated by experts">500 сделок замороженного набора, размеченных экспертами</td>
+            <td class="rule2" data-label-ru="правило" data-label-en="rule" data-ru="Решение модели против экспертного вердикта по каждой сделке. Критический recall и классы ошибок гейтятся отдельно — среднее их прячет" data-en="The model's decision against the expert verdict on each deal. Critical recall and error classes are gated separately — an average hides them">Решение модели против экспертного вердикта по каждой сделке. Критический recall и классы ошибок гейтятся отдельно — среднее их прячет</td>
+            <td class="val" data-label-ru="значение" data-label-en="value" data-ru="98%" data-en="98%">98%</td>
           </tr>
           <tr>
             <td>03</td>
-            <td data-ru="Экономика моделей" data-en="Model economics">Экономика моделей</td>
-            <td class="formula" data-ru="cost_per_1k_deals(before) vs cost_per_1k_deals(after) при одинаковых output_contract, benchmark и quality_gates" data-en="cost_per_1k_deals(before) vs cost_per_1k_deals(after) with identical output_contract, benchmark and quality_gates">cost_per_1k_deals(before) vs cost_per_1k_deals(after) при одинаковых output_contract, benchmark и quality_gates</td>
-            <td class="val">−88%</td>
+            <td class="metric" data-label-ru="метрика" data-label-en="metric" data-ru="Экономика моделей" data-en="Model economics">Экономика моделей</td>
+            <td class="den2" data-label-ru="знаменатель" data-label-en="denominator" data-ru="Стоимость сценария на 1 000 сделок" data-en="Cost of the scenario per 1,000 deals">Стоимость сценария на 1 000 сделок</td>
+            <td class="rule2" data-label-ru="правило" data-label-en="rule" data-ru="До и после переезда при неизменных схеме ответа, бенчмарке и гейтах качества; цены зафиксированы снимком на дату" data-en="Before and after the migration, with the output schema, benchmark and quality gates unchanged; prices frozen as a dated snapshot">До и после переезда при неизменных схеме ответа, бенчмарке и гейтах качества; цены зафиксированы снимком на дату</td>
+            <td class="val" data-label-ru="значение" data-label-en="value" data-ru="−88%" data-en="−88%">−88%</td>
           </tr>
           <tr>
             <td>04</td>
-            <td data-ru="Эффект Voice AI" data-en="Voice AI impact">Эффект Voice AI</td>
-            <td class="formula" data-ru="automated / eligible_routine_consultations; рост квалифицированных лидов — первый месяц против прежнего процесса" data-en="automated / eligible_routine_consultations; qualified-lead lift — month one vs the previous process">automated / eligible_routine_consultations; рост квалифицированных лидов — первый месяц против прежнего процесса</td>
-            <td class="val">45–50% · ×1,2</td>
+            <td class="metric" data-label-ru="метрика" data-label-en="metric" data-ru="Эффект Voice AI" data-en="Voice AI impact">Эффект Voice AI</td>
+            <td class="den2" data-label-ru="знаменатель" data-label-en="denominator" data-ru="Подходящие типовые консультации — для доли; прежний процесс — для лидов" data-en="Eligible routine consultations for the share; the previous process for the leads">Подходящие типовые консультации — для доли; прежний процесс — для лидов</td>
+            <td class="rule2" data-label-ru="правило" data-label-en="rule" data-ru="Доля, прошедшая без оператора, и рост квалифицированных лидов в первый месяц" data-en="The share handled without an operator, and the qualified-lead lift in month one">Доля, прошедшая без оператора, и рост квалифицированных лидов в первый месяц</td>
+            <td class="val" data-label-ru="значение" data-label-en="value" data-ru="45–50% · ×1,2" data-en="45–50% · ×1.2">45–50% · ×1,2</td>
           </tr>
           <tr>
             <td>05</td>
-            <td data-ru="Экономия контакт-центра" data-en="Contact-centre saving">Экономия контакт-центра</td>
-            <td class="formula" data-ru="стоимость обслуживания того же потока консультаций до и после автоматизации, рублей в месяц" data-en="cost of servicing the same consultation flow before and after automation, RUB per month">стоимость обслуживания того же потока консультаций до и после автоматизации, рублей в месяц</td>
-            <td class="val" data-ru="≥ 1 млн ₽" data-en="≥ 1M RUB">≥ 1 млн ₽</td>
+            <td class="metric" data-label-ru="метрика" data-label-en="metric" data-ru="Экономия контакт-центра" data-en="Contact-centre saving">Экономия контакт-центра</td>
+            <td class="den2" data-label-ru="знаменатель" data-label-en="denominator" data-ru="Стоимость обслуживания того же потока консультаций" data-en="Cost of servicing the same consultation flow">Стоимость обслуживания того же потока консультаций</td>
+            <td class="rule2" data-label-ru="правило" data-label-en="rule" data-ru="До и после автоматизации, рублей в месяц" data-en="Before and after automation, RUB per month">До и после автоматизации, рублей в месяц</td>
+            <td class="val" data-label-ru="значение" data-label-en="value" data-ru="≥ 1 млн ₽" data-en="≥ 1M RUB">≥ 1 млн ₽</td>
           </tr>
         </tbody>
       </table>

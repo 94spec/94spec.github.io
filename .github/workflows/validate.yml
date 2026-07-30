@@ -79,6 +79,9 @@ jobs:
           grep -Fq 'знаменатель — 500 сделок замороженного golden set' index.html
           grep -Fq 'знаменатель — диалоги, прошедшие фильтр длительности и содержания' index.html
           grep -Fq 'при неизменных схеме ответа, бенчмарке и гейтах качества' index.html
+          # §02 states a denominator and a comparison rule for every metric.
+          test "$(grep -c 'data-label-ru="знаменатель"' index.html)" -eq 5
+          test "$(grep -c 'data-label-ru="правило"' index.html)" -eq 5
 
       - name: No confidential material in the page
         shell: bash

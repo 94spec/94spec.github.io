@@ -91,6 +91,10 @@ def build() -> str:
         raise SystemExit("the language switch markup changed — update build_en.py")
     text = text.replace(switch_ru, switch_en)
 
+    # The stacked-table labels on small screens come from a CSS attr(), which no
+    # amount of text promotion would translate.
+    text = text.replace("attr(data-label-ru)", "attr(data-label-en)")
+
     return text
 
 
