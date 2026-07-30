@@ -1,0 +1,85 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Required production assets are present
+        shell: bash
+        run: |
+          set -euo pipefail
+          for asset in index.html 404.html og.png favicon.svg robots.txt sitemap.xml .nojekyll \
+                       cv/index.html cv/dmitry-prom-cv-ru.pdf cv/dmitry-prom-cv-en.pdf; do
+            test -s "$asset" || { echo "missing or empty: $asset"; exit 1; }
+          done
+          test "$(ls fonts/*.woff2 | wc -l)" -ge 6
+          # A PDF that is not a PDF (or a stub) is worse than a missing link.
+          for pdf in cv/*.pdf; do
+            head -c 5 "$pdf" | grep -q '%PDF' || { echo "not a pdf: $pdf"; exit 1; }
+            test "$(stat -c %s "$pdf")" -gt 40000 || { echo "suspiciously small: $pdf"; exit 1; }
+          done
+
+      - name: Page structure, metadata, anchors and assets
+        run: |
+          python scripts/check_page.py index.html
+          python scripts/check_page.py cv/index.html
+
+      - name: Public links and contacts are wired up
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq 'https://github.com/94spec/conversation-intelligence-lab' index.html
+          grep -Fq 'https://github.com/94spec/llm-evaluation-harness' index.html
+          grep -Fq 'https://leadchat.online/' index.html
+          grep -Fq 'mailto:xpromx94@yandex.ru' index.html
+          grep -Fq 'href="/cv/"' index.html
+          grep -Fq 'Sitemap: https://94spec.github.io/sitemap.xml' robots.txt
+          grep -Fq '<loc>https://94spec.github.io/</loc>' sitemap.xml
+          grep -Fq '<loc>https://94spec.github.io/cv/</loc>' sitemap.xml
+
+      - name: Page renders without JavaScript
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Content must live in the HTML itself: crawlers and link previews
+          # do not execute scripts. Fail if the body is just a loader.
+          grep -Fq 'AI Engineer &amp; Data Analyst' index.html
+          grep -Fq 'аналитика, по которой принимают решения' index.html
+          ! grep -Fq 'This page requires JavaScript' index.html
+
+      - name: Claims keep their denominators
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq 'знаменатель — 500 сделок замороженного golden set' index.html
+          grep -Fq 'знаменатель — диалоги, прошедшие фильтр длительности и содержания' index.html
+          grep -Fq 'при неизменных схеме ответа, бенчмарке и гейтах качества' index.html
+
+      - name: No confidential material in the page
+        shell: bash
+        run: |
+          set -euo pipefail
+          # scripts/check_page.py already rejects internal hostnames, issue
+          # keys, record ids and raw uuids by shape. Optionally, a private
+          # word list can be supplied as a repository secret so that the
+          # exact terms never appear in this public workflow file.
+          if [ -n "${DENYLIST:-}" ]; then
+            ! grep -qiE "$DENYLIST" index.html
+          fi
+        env:
+          DENYLIST: ${{ secrets.CONTENT_DENYLIST }}

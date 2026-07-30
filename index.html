@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дмитрий Пром — AI Engineer &amp; Data Analyst (LLM-based analytics)</title>
+<meta name="description" content="Строю production LLM-системы для коммерческих процессов и делаю на их данных аналитику, по которой принимают решения: контроль качества коммуникаций, voice AI, enterprise RAG, evaluation и экономика моделей.">
+<meta name="author" content="Дмитрий Пром">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#08090a">
+<link rel="canonical" href="https://94spec.github.io/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:site_name" content="Дмитрий Пром — AI Engineer &amp; Data Analyst">
+<meta property="og:title" content="Дмитрий Пром — AI Engineer &amp; Data Analyst (LLM-based analytics)">
+<meta property="og:description" content="Production LLM-системы для продаж и аналитика на их данных: контроль качества коммуникаций, voice AI, enterprise RAG, evaluation, экономика моделей.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://94spec.github.io/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://94spec.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Дмитрий Пром — production AI systems and analytics for revenue teams">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Дмитрий Пром — AI Engineer &amp; Data Analyst (LLM-based analytics)">
+<meta name="twitter:description" content="Production LLM-системы для продаж и аналитика, по которой принимают решения.">
+<meta name="twitter:image" content="https://94spec.github.io/og.png">
+<link rel="preload" href="/fonts/jetbrains-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Дмитрий Пром","alternateName":"Dmitry Prom","url":"https://94spec.github.io/","email":"mailto:xpromx94@yandex.ru","jobTitle":"AI Engineer & Data Analyst (LLM-based analytics)","description":"Строю production LLM-системы для коммерческих процессов и делаю на их данных аналитику для бизнес-решений.","sameAs":["https://github.com/94spec","https://leadchat.online/"],"knowsAbout":["Applied AI","Large Language Models","Conversation Intelligence","LLM Evaluation","Retrieval-Augmented Generation","Voice AI","AI Agents","Sales Analytics","Marketing Analytics"]}
+</script>
+<style>
+/* ─── fonts ─────────────────────────────────────────────────────────── */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:100%;font-display:swap;src:url("/fonts/archivo-latin.woff2") format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:100%;font-display:swap;src:url("/fonts/archivo-latin-ext.woff2") format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url("/fonts/jetbrains-latin.woff2") format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url("/fonts/jetbrains-latin-ext.woff2") format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url("/fonts/jetbrains-cyrillic.woff2") format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url("/fonts/jetbrains-cyrillic-ext.woff2") format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+
+/* ─── tokens ────────────────────────────────────────────────────────── */
+:root{
+  --bg:#08090a; --panel:#0b0d0b; --ink:#e8ebe4; --muted:#9aa093;
+  --accent:#a3ff12; --line:#1e211d; --line2:#23261f;
+  --blue:#7fb2ff; --amber:#ffd166; --coral:#ff7a5c;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --display:'Archivo','JetBrains Mono',system-ui,sans-serif;
+  --pad:clamp(20px,4vw,48px);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.6;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:#fff}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+ul{padding:0;list-style:none}
+::selection{background:var(--accent);color:var(--bg)}
+img{max-width:100%;height:auto}
+
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--bg);padding:10px 16px;z-index:100}
+.skip:focus{left:8px;top:8px}
+.wrap{max-width:1500px;margin:0 auto}
+.eyebrow{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.accent{color:var(--accent)}
+.mutedtext{color:var(--muted)}
+
+/* ─── header ────────────────────────────────────────────────────────── */
+.hd{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:0 var(--pad);min-height:62px;background:rgba(8,9,10,.93);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);padding:12px 0}
+.mark{width:26px;height:26px;display:grid;place-items:center;background:var(--accent);color:var(--bg);font-weight:700;font-size:11px}
+.brand span:last-child{font-size:12.5px;letter-spacing:.06em}
+.nav{display:flex;gap:18px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;flex-wrap:wrap}
+.nav a{color:var(--muted)}
+.nav a:hover{color:var(--accent)}
+.hdright{display:flex;align-items:center;gap:14px;padding:10px 0}
+.langbox{display:flex;border:1px solid var(--line2)}
+.langbox button{font:inherit;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+                padding:6px 10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.langbox button[aria-pressed="true"]{background:var(--accent);color:var(--bg);font-weight:700}
+.status{display:flex;align-items:center;gap:9px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulsedot 2.4s ease-in-out infinite}
+
+/* ─── layout primitives ─────────────────────────────────────────────── */
+section{border-bottom:1px solid var(--line)}
+.sec{padding:clamp(46px,6vw,74px) var(--pad)}
+.sechd{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;justify-content:space-between;
+       margin-bottom:34px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+h2{font-family:var(--display);font-size:clamp(21px,2.6vw,31px);line-height:1.15;font-weight:700;letter-spacing:-.01em;max-width:24ch}
+h3{font-size:14px;font-weight:700;letter-spacing:.01em}
+.lead{color:var(--muted);max-width:78ch;margin-top:14px}
+.grid{display:grid;gap:1px;background:var(--line)}
+/* min-width:0 keeps a long unbreakable child (the terminal line, a wide
+   table) from stretching its track past the viewport. */
+.grid>*{background:var(--bg);min-width:0}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.cell{padding:24px 22px}
+.tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);padding:6px 11px;
+     font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ─── hero ──────────────────────────────────────────────────────────── */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.hero>*{min-width:0}
+.heroL{padding:clamp(44px,6vw,80px) var(--pad);border-right:1px solid var(--line)}
+.heroR{padding:clamp(28px,4vw,44px) var(--pad);background:var(--panel)}
+h1{font-family:var(--display);font-weight:900;letter-spacing:-.02em;line-height:.98;
+   font-size:clamp(36px,7vw,86px);text-transform:uppercase;margin:22px 0 0}
+h1 .l2{color:var(--accent)}
+.whoami{margin-top:18px;font-size:12.5px;letter-spacing:.04em;color:var(--muted)}
+.cmdline{margin-top:26px;padding:12px 14px;border:1px solid var(--line2);background:var(--panel);
+         font-size:12px;color:var(--muted);overflow-x:auto;white-space:nowrap}
+.cmdline b{color:var(--accent);font-weight:400}
+.herotext{margin-top:26px;font-size:15px;line-height:1.65;max-width:62ch}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 18px;border:1px solid var(--line2);
+     font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:700}
+.btn.primary:hover{background:#b4ff3d;color:var(--bg)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:30px;font-size:11px;letter-spacing:.08em;
+       color:var(--muted);text-transform:uppercase}
+
+/* trace panel */
+.tracehd{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+         font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.trace{margin-top:16px;border:1px solid var(--line2);background:var(--bg)}
+.trow{display:grid;grid-template-columns:74px 104px minmax(0,1fr);gap:12px;padding:11px 14px;
+      border-bottom:1px solid var(--line);font-size:11.5px;align-items:center}
+.trow:last-child{border-bottom:0}
+.trow .t{color:#5f6b58}
+.trow .msg{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pipe{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px}
+.pipe span{border:1px solid var(--line2);padding:6px 9px;font-size:10.5px;letter-spacing:.1em;
+           text-transform:uppercase;color:var(--muted)}
+.pipe span.on{border-color:var(--accent);color:var(--accent)}
+.disclaim{margin-top:16px;font-size:11px;color:#6f7a68;line-height:1.5}
+
+/* ─── numbers ───────────────────────────────────────────────────────── */
+.num{font-family:var(--display);font-weight:900;letter-spacing:-.02em;line-height:1;
+     font-size:clamp(30px,3.6vw,46px);color:var(--accent)}
+.numsm{font-family:var(--display);font-weight:900;font-size:clamp(20px,2.2vw,28px);line-height:1.05;color:var(--ink)}
+.cap{margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.den{margin-top:10px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#6f7a68;line-height:1.5}
+
+/* ─── table ─────────────────────────────────────────────────────────── */
+.tablewrap{overflow-x:auto;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:12.5px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400;background:var(--panel)}
+tr:last-child td{border-bottom:0}
+td.formula{font-size:11.5px;color:var(--muted);word-break:break-word}
+td.val{color:var(--accent);white-space:nowrap;font-weight:700}
+
+/* ─── cards ─────────────────────────────────────────────────────────── */
+.card{padding:26px 24px}
+.card h3{margin-bottom:12px}
+.card p{color:var(--muted);font-size:13px}
+.card p+p{margin-top:12px}
+.kicker{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.rule{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink)}
+.ask{margin:0 0 14px;padding:12px 14px;border-left:2px solid var(--accent);background:var(--panel);
+     font-size:12px;color:var(--ink)}
+.ask b{color:var(--accent);font-weight:400;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;display:block;margin-bottom:6px}
+.vs{display:grid;gap:1px;background:var(--line);margin-top:16px}
+.vs>div{background:var(--bg);padding:14px 16px;font-size:12.5px}
+.vs .pick{color:var(--ink)}
+.vs .pick b{color:var(--accent);font-weight:700}
+.vs .alt{color:var(--muted)}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:20px 22px}
+.step .n{font-family:var(--display);font-weight:900;font-size:15px;color:#4d5648}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.chips span{border:1px solid var(--line2);padding:6px 10px;font-size:11px;color:var(--muted)}
+.chips.prod span{border-color:#2f3a26;color:var(--ink)}
+.list li{padding:11px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:12.5px}
+.list li:last-child{border-bottom:0}
+.list b{color:var(--ink);font-weight:700}
+
+/* ─── cta / footer ──────────────────────────────────────────────────── */
+.final{padding:clamp(52px,7vw,86px) var(--pad);text-align:center}
+.final h2{margin:14px auto 0;max-width:30ch}
+.final .lead{margin:16px auto 0}
+.contacts{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:32px}
+.ft{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;
+    padding:24px var(--pad);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6f7a68}
+
+@keyframes pulsedot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.9);opacity:.25}}
+
+/* ─── responsive ────────────────────────────────────────────────────── */
+@media (max-width:1080px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .heroL{border-right:0;border-bottom:1px solid var(--line)}
+  .g5,.g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:720px){
+  .nav{display:none}
+  .g2,.g3,.g4,.g5{grid-template-columns:minmax(0,1fr)}
+  h1{font-size:clamp(30px,9vw,46px)}
+  .whoami,.facts{word-break:break-word}
+  .trow{grid-template-columns:62px minmax(0,1fr);row-gap:4px}
+  .trow .op{grid-column:2}
+  .trow .msg{grid-column:1/-1;white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#content" data-ru="К содержанию" data-en="Skip to content">К содержанию</a>
+
+<header class="hd">
+  <a class="brand" href="#top">
+    <span class="mark" aria-hidden="true">94</span>
+    <span>spec / applied-ai</span>
+  </a>
+  <nav class="nav" aria-label="Разделы">
+    <a href="#scale" data-ru="масштаб" data-en="scale">масштаб</a>
+    <a href="#measure" data-ru="измерения" data-en="measurement">измерения</a>
+    <a href="#platform" data-ru="платформа" data-en="platform">платформа</a>
+    <a href="#analytics" data-ru="аналитика" data-en="analytics">аналитика</a>
+    <a href="#decisions" data-ru="решения" data-en="trade-offs">решения</a>
+    <a href="#leadchat">lead chat</a>
+    <a href="#systems" data-ru="системы" data-en="systems">системы</a>
+    <a href="/cv/" data-ru="резюме" data-en="cv">резюме</a>
+    <a href="https://github.com/94spec" target="_blank" rel="noopener">github</a>
+  </nav>
+  <div class="hdright">
+    <div class="langbox" role="group" aria-label="Язык / Language">
+      <button type="button" id="lang-ru" aria-pressed="true">ru</button>
+      <button type="button" id="lang-en" aria-pressed="false">en</button>
+    </div>
+    <span class="status"><span class="dot" aria-hidden="true"></span><span data-ru="открыт к предложениям" data-en="open to offers">открыт к предложениям</span></span>
+  </div>
+</header>
+
+<main id="content">
+
+<!-- ── HERO ─────────────────────────────────────────────────────────── -->
+<section id="top">
+  <div class="hero wrap">
+    <div class="heroL">
+      <span class="tag" data-ru="Senior / Lead Applied AI · удалённо · UTC+3" data-en="Senior / Lead Applied AI · remote · UTC+3">Senior / Lead Applied AI · удалённо · UTC+3</span>
+      <h1>
+        <span>LLM systems</span><br>
+        <span class="l2">for revenue</span><br>
+        <span data-ru="и аналитика" data-en="and analytics">и аналитика</span>
+      </h1>
+      <p class="whoami" data-ru="Дмитрий Пром · AI Engineer &amp; Data Analyst (LLM-based analytics)" data-en="Dmitry Prom · AI Engineer &amp; Data Analyst (LLM-based analytics)">Дмитрий Пром · AI Engineer &amp; Data Analyst (LLM-based analytics)</p>
+      <div class="cmdline"><b>$</b> <span data-ru="разговор → транскрипт → оценка → структурированные данные →" data-en="conversation → transcript → scoring → structured data →">разговор → транскрипт → оценка → структурированные данные →</span> <b data-ru="решение" data-en="decision">решение</b></div>
+      <p class="herotext" data-ru="Строю системы, которые закрывают ручную работу отдела продаж: разговор с клиентом превращается в проверяемые данные. И сам собираю на этих данных аналитику, по которой в компании принимают решения — по продажам, маркетингу, продукту и тарифам." data-en="I build systems that take manual work off a sales floor: a customer conversation becomes verifiable data. And I do the analysis on top of that data — the analysis behind decisions on sales, marketing, product and pricing.">Строю системы, которые закрывают ручную работу отдела продаж: разговор с клиентом превращается в проверяемые данные. И сам собираю на этих данных аналитику, по которой в компании принимают решения — по продажам, маркетингу, продукту и тарифам.</p>
+      <div class="cta">
+        <a class="btn primary" href="#analytics" data-ru="Аналитика и решения ↓" data-en="Analytics and decisions ↓">Аналитика и решения ↓</a>
+        <a class="btn" href="#platform" data-ru="Инженерия ↓" data-en="Engineering ↓">Инженерия ↓</a>
+        <a class="btn" href="https://leadchat.online/" target="_blank" rel="noopener" data-ru="Мой SaaS ↗" data-en="My SaaS ↗">Мой SaaS ↗</a>
+      </div>
+      <p class="facts">
+        <span data-ru="удалённо" data-en="remote">удалённо</span>
+        <span>UTC+3</span>
+        <span data-ru="рассматриваю зарубеж" data-en="open to teams abroad">рассматриваю зарубеж</span>
+        <span>RU / EN</span>
+      </p>
+    </div>
+
+    <div class="heroR">
+      <div class="tracehd">
+        <span data-ru="пример трассировки · синтетические данные" data-en="example trace · synthetic data">пример трассировки · синтетические данные</span>
+        <span data-ru="путь одного разговора" data-en="one conversation, end to end">путь одного разговора</span>
+      </div>
+      <div class="trace">
+        <div class="trow"><span class="t">00.118</span><span class="op" style="color:var(--accent)">stt</span><span class="msg" data-ru="транскрипт, разделение говорящих" data-en="transcript, speaker separation">транскрипт, разделение говорящих</span></div>
+        <div class="trow"><span class="t">00.402</span><span class="op" style="color:var(--blue)">filter</span><span class="msg" data-ru="отбор по длительности и содержанию" data-en="duration and content filter">отбор по длительности и содержанию</span></div>
+        <div class="trow"><span class="t">00.688</span><span class="op" style="color:var(--blue)">retrieve</span><span class="msg" data-ru="регламент и карточка клиента в контекст" data-en="policy and customer record into context">регламент и карточка клиента в контекст</span></div>
+        <div class="trow"><span class="t">00.977</span><span class="op" style="color:var(--amber)">checks</span><span class="msg" data-ru="критерии чек-листа, схема ответа" data-en="checklist criteria, output schema">критерии чек-листа, схема ответа</span></div>
+        <div class="trow"><span class="t">01.240</span><span class="op" style="color:var(--amber)">summary</span><span class="msg" data-ru="поля и детекторы саммари" data-en="summary fields and detectors">поля и детекторы саммари</span></div>
+        <div class="trow"><span class="t">01.361</span><span class="op" style="color:var(--accent)">eval</span><span class="msg" data-ru="сверка с golden set, гейты релиза" data-en="golden-set check, release gates">сверка с golden set, гейты релиза</span></div>
+        <div class="trow"><span class="t">01.640</span><span class="op" style="color:var(--coral)">deliver</span><span class="msg" data-ru="CRM, BI и отчёт заказчику" data-en="CRM, BI and the stakeholder report">CRM, BI и отчёт заказчику</span></div>
+      </div>
+      <div class="pipe">
+        <span class="on">stt</span><span data-ru="бизнес-правила" data-en="business rules">бизнес-правила</span>
+        <span data-ru="оркестрация llm" data-en="llm orchestration">оркестрация llm</span>
+        <span>evals</span><span>rag</span>
+        <span data-ru="голосовые агенты" data-en="voice agents">голосовые агенты</span>
+        <span class="on">crm / bi</span>
+      </div>
+      <p class="disclaim" data-ru="Это схема, а не мониторинг: шаги показывают порядок обработки. Значения на странице не приходят из живой системы." data-en="This is a diagram, not a monitor: the steps show the processing order. No value on this page is pulled from a live system.">Это схема, а не мониторинг: шаги показывают порядок обработки. Значения на странице не приходят из живой системы.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── §01 SCALE ────────────────────────────────────────────────────── -->
+<section id="scale">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§01 / <span data-ru="масштаб" data-en="scale">масштаб</span></p>
+        <h2 data-ru="Production-системы на реальных коммерческих процессах" data-en="Production systems on real commercial processes">Production-системы на реальных коммерческих процессах</h2>
+      </div>
+      <p class="eyebrow accent" data-ru="каждая цифра приходит со знаменателем" data-en="every number comes with its denominator">каждая цифра приходит со знаменателем</p>
+    </div>
+
+    <div class="grid g4">
+      <div class="cell">
+        <p class="num">90</p>
+        <p class="cap" data-ru="production-пайплайнов в конфигурации платформы" data-en="production pipelines in the platform configuration">production-пайплайнов в конфигурации платформы</p>
+        <p class="den" data-ru="объём системы" data-en="system volume">объём системы</p>
+      </div>
+      <div class="cell">
+        <p class="num">100%</p>
+        <p class="cap" data-ru="подходящих диалогов оценивается вместо ≤20% ручной выборки" data-en="of eligible conversations evaluated, instead of ≤20% manual sampling">подходящих диалогов оценивается вместо ≤20% ручной выборки</p>
+        <p class="den" data-ru="знаменатель — диалоги, прошедшие фильтр длительности и содержания" data-en="denominator — conversations passing the duration and content filter">знаменатель — диалоги, прошедшие фильтр длительности и содержания</p>
+      </div>
+      <div class="cell">
+        <p class="num">98%</p>
+        <p class="cap" data-ru="совпадение решений AI и экспертов" data-en="agreement between AI and expert decisions">совпадение решений AI и экспертов</p>
+        <p class="den" data-ru="знаменатель — 500 сделок замороженного golden set" data-en="denominator — 500 deals in a frozen golden set">знаменатель — 500 сделок замороженного golden set</p>
+      </div>
+      <div class="cell">
+        <p class="num">−88%</p>
+        <p class="cap" data-ru="стоимость ключевого LLM-сценария на 1 000 сделок" data-en="cost of the key LLM scenario per 1,000 deals">стоимость ключевого LLM-сценария на 1 000 сделок</p>
+        <p class="den" data-ru="при неизменных схеме ответа, бенчмарке и гейтах качества" data-en="with output schema, benchmark and quality gates unchanged">при неизменных схеме ответа, бенчмарке и гейтах качества</p>
+      </div>
+    </div>
+
+    <div class="grid g4" style="margin-top:1px">
+      <div class="cell">
+        <p class="numsm">464</p>
+        <p class="cap" data-ru="критерия чек-листов" data-en="checklist criteria">критерия чек-листов</p>
+      </div>
+      <div class="cell">
+        <p class="numsm">246</p>
+        <p class="cap" data-ru="полей и детекторов саммари" data-en="summary fields and detectors">полей и детекторов саммари</p>
+      </div>
+      <div class="cell">
+        <p class="numsm">55 / 32</p>
+        <p class="cap" data-ru="активных чек-листов и конфигураций саммари" data-en="active checklists and summary configurations">активных чек-листов и конфигураций саммари</p>
+      </div>
+      <div class="cell">
+        <p class="numsm">≥ 1 млн ₽</p>
+        <p class="cap" data-ru="экономии на контакт-центре в месяц · детали по запросу" data-en="monthly contact-centre saving · details on request">экономии на контакт-центре в месяц · детали по запросу</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §02 MEASUREMENT ──────────────────────────────────────────────── -->
+<section id="measure">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§02 / <span data-ru="слой измерений" data-en="measurement layer">слой измерений</span></p>
+        <h2 data-ru="Как считаются ключевые метрики" data-en="How the key metrics are computed">Как считаются ключевые метрики</h2>
+      </div>
+      <p class="eyebrow" data-ru="выборка · знаменатель · правило сравнения" data-en="sample · denominator · comparison rule">выборка · знаменатель · правило сравнения</p>
+    </div>
+    <p class="lead" style="margin:0 0 26px" data-ru="У каждого результата зафиксированы выборка, знаменатель и правило сравнения. Публичные репозитории воспроизводят расчёты и контроль качества на синтетических данных — без коммерческой информации." data-en="Every result has a fixed sample, denominator and comparison rule. Public repositories reproduce the calculations and quality controls on synthetic data — with no commercial information.">У каждого результата зафиксированы выборка, знаменатель и правило сравнения. Публичные репозитории воспроизводят расчёты и контроль качества на синтетических данных — без коммерческой информации.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>№</th>
+            <th data-ru="метрика" data-en="metric">метрика</th>
+            <th data-ru="формула и правило" data-en="formula and rule">формула и правило</th>
+            <th data-ru="значение" data-en="value">значение</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td data-ru="Покрытие оценкой" data-en="Evaluation coverage">Покрытие оценкой</td>
+            <td class="formula">evaluated_conversations / conversations_passing(duration_filter ∧ content_filter)</td>
+            <td class="val">100% / ≤20%</td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td data-ru="Совпадение решений" data-en="Decision agreement">Совпадение решений</td>
+            <td class="formula" data-ru="model_decision == frozen_golden_set(expert_adjudicated, n=500 сделок); критический recall и классы ошибок контролируются отдельно" data-en="model_decision == frozen_golden_set(expert_adjudicated, n=500 deals); critical recall and error classes are tracked separately">model_decision == frozen_golden_set(expert_adjudicated, n=500 сделок); критический recall и классы ошибок контролируются отдельно</td>
+            <td class="val">98%</td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td data-ru="Экономика моделей" data-en="Model economics">Экономика моделей</td>
+            <td class="formula" data-ru="cost_per_1k_deals(before) vs cost_per_1k_deals(after) при одинаковых output_contract, benchmark и quality_gates" data-en="cost_per_1k_deals(before) vs cost_per_1k_deals(after) with identical output_contract, benchmark and quality_gates">cost_per_1k_deals(before) vs cost_per_1k_deals(after) при одинаковых output_contract, benchmark и quality_gates</td>
+            <td class="val">−88%</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td data-ru="Эффект Voice AI" data-en="Voice AI impact">Эффект Voice AI</td>
+            <td class="formula" data-ru="automated / eligible_routine_consultations; рост квалифицированных лидов — первый месяц против прежнего процесса" data-en="automated / eligible_routine_consultations; qualified-lead lift — month one vs the previous process">automated / eligible_routine_consultations; рост квалифицированных лидов — первый месяц против прежнего процесса</td>
+            <td class="val">45–50% · ×1,2</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td data-ru="Экономия контакт-центра" data-en="Contact-centre saving">Экономия контакт-центра</td>
+            <td class="formula" data-ru="стоимость обслуживания того же потока консультаций до и после автоматизации, рублей в месяц" data-en="cost of servicing the same consultation flow before and after automation, RUB per month">стоимость обслуживания того же потока консультаций до и после автоматизации, рублей в месяц</td>
+            <td class="val">≥ 1 млн ₽</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cta">
+      <a class="btn" href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener" data-ru="→ фреймворк оценки" data-en="→ evaluation framework">→ фреймворк оценки</a>
+      <a class="btn" href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener" data-ru="→ трассируемый аналитический пайплайн" data-en="→ traceable analytics pipeline">→ трассируемый аналитический пайплайн</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── §03 PLATFORM ─────────────────────────────────────────────────── -->
+<section id="platform">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§03 / <span data-ru="флагман 01" data-en="flagship 01">флагман 01</span> · <span data-ru="крупная edtech-платформа (РФ)" data-en="major edtech platform (RU)">крупная edtech-платформа (РФ)</span></p>
+        <h2 data-ru="AI-контроль качества всех коммуникаций с клиентом" data-en="AI quality control across every customer communication">AI-контроль качества всех коммуникаций с клиентом</h2>
+      </div>
+      <p class="eyebrow" data-ru="от ручной выборки к сплошной оценке" data-en="from manual sampling to full coverage">от ручной выборки к сплошной оценке</p>
+    </div>
+
+    <p class="lead" style="margin:0 0 26px" data-ru="Раньше отдел контроля качества слушал выборку разговоров руками. Сейчас поток коммуникаций транскрибируется, фильтруется, оценивается по чек-листам и превращается в структурированные данные для руководителей, CRM и BI — по всем сотрудникам, которые общаются с клиентом. Я собрал этот контур целиком: логику платформы, системные промты, выбор моделей, пайплайны, правила оценки, выгрузку и калибровку на живом потоке." data-en="Quality control used to listen to a manual sample of calls. Now the communication flow is transcribed, filtered, scored against checklists and turned into structured data for managers, CRM and BI — covering every employee who talks to customers. I built this loop end to end: platform logic, system prompts, model selection, pipelines, scoring rules, delivery and calibration on live traffic.">Раньше отдел контроля качества слушал выборку разговоров руками. Сейчас поток коммуникаций транскрибируется, фильтруется, оценивается по чек-листам и превращается в структурированные данные для руководителей, CRM и BI — по всем сотрудникам, которые общаются с клиентом. Я собрал этот контур целиком: логику платформы, системные промты, выбор моделей, пайплайны, правила оценки, выгрузку и калибровку на живом потоке.</p>
+
+    <div class="grid g5">
+      <div class="step"><span class="n">01</span><span><h3 data-ru="CRM и телефония" data-en="CRM & telephony">CRM и телефония</h3><p class="cap" data-ru="звонки, переписка, сделки, метаданные" data-en="calls, chats, deals, metadata">звонки, переписка, сделки, метаданные</p></span></div>
+      <div class="step"><span class="n">02</span><span><h3 data-ru="Транскрибация" data-en="Transcription">Транскрибация</h3><p class="cap" data-ru="разделение говорящих и нормализация текста" data-en="speaker separation and text normalisation">разделение говорящих и нормализация текста</p></span></div>
+      <div class="step"><span class="n">03</span><span><h3 data-ru="Движок пайплайнов" data-en="Pipeline engine">Движок пайплайнов</h3><p class="cap" data-ru="фильтры, теги, действия при сбое" data-en="filters, tags, failure actions">фильтры, теги, действия при сбое</p></span></div>
+      <div class="step"><span class="n">04</span><span><h3 data-ru="LLM-слой" data-en="LLM layer">LLM-слой</h3><p class="cap" data-ru="оценка по чек-листу, саммари, смысловая аналитика" data-en="checklist scoring, summaries, semantic analytics">оценка по чек-листу, саммари, смысловая аналитика</p></span></div>
+      <div class="step"><span class="n">05</span><span><h3>PostgreSQL / BI / CRM</h3><p class="cap" data-ru="данные там, где уже работает команда" data-en="data where the team already works">данные там, где уже работает команда</p></span></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:1px">
+      <div class="card">
+        <p class="kicker" data-ru="замкнутая петля" data-en="closed loop">замкнутая петля</p>
+        <h3 data-ru="Система, которая проверяет саму себя" data-en="A system that checks itself">Система, которая проверяет саму себя</h3>
+        <p data-ru="Четыре golden set под разные задачи: балльная оценка, саммари, смысловая аналитика, нарушения. Экспертная калибровка, регрессионные гейты и разбор ошибок после каждой смены модели или промта. Критические пропуски блокируют релиз — средней точности для этого недостаточно." data-en="Four golden sets for different tasks: scoring, summaries, semantic analytics, violations. Human calibration, regression gates and error analysis after every model or prompt change. Critical misses block the release — average accuracy is not enough.">Четыре golden set под разные задачи: балльная оценка, саммари, смысловая аналитика, нарушения. Экспертная калибровка, регрессионные гейты и разбор ошибок после каждой смены модели или промта. Критические пропуски блокируют релиз — средней точности для этого недостаточно.</p>
+      </div>
+      <div class="card">
+        <p class="kicker" data-ru="что это дало" data-en="what it delivered">что это дало</p>
+        <h3 data-ru="Оценка перестала быть выборочной" data-en="Evaluation stopped being a sample">Оценка перестала быть выборочной</h3>
+        <p data-ru="Руководитель видит не мнение по десяти звонкам, а весь поток: где нарушают регламент, где теряют сделку, какие возражения не отрабатывают. На этих же данных строится аналитика следующего раздела — это одна система, а не две." data-en="A manager no longer sees an opinion based on ten calls, but the whole flow: where policy is broken, where deals are lost, which objections go unanswered. The analytics in the next section run on the same data — one system, not two.">Руководитель видит не мнение по десяти звонкам, а весь поток: где нарушают регламент, где теряют сделку, какие возражения не отрабатывают. На этих же данных строится аналитика следующего раздела — это одна система, а не две.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §04 ANALYTICS ────────────────────────────────────────────────── -->
+<section id="analytics">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§04 / <span data-ru="аналитика" data-en="analytics">аналитика</span></p>
+        <h2 data-ru="Аналитика, по которой принимают решения" data-en="The analysis behind the decisions">Аналитика, по которой принимают решения</h2>
+      </div>
+      <p class="eyebrow" data-ru="продажи · маркетинг · продукт и тарифы · конкуренты" data-en="sales · marketing · product and pricing · competitors">продажи · маркетинг · продукт и тарифы · конкуренты</p>
+    </div>
+
+    <p class="lead" style="margin:0 0 26px" data-ru="Вторая половина моей работы начинается там, где заканчивается пайплайн. Задачи приходят от бизнеса как заявки с целью и экономическим обоснованием: «понять, почему упала конверсия», «оценить спрос на программу», «выяснить, зачем к нам приходят действующие клиенты». Я собираю по такой заявке разрез, проверяю выборку и приношу ответ в виде, пригодном для решения: что происходит, чем это подтверждается и чего эти данные не показывают. Отчёты обсуждаются с руководителями направлений и топ-менеджментом, у каждого есть заказчик и оценка полезности." data-en="The second half of my job starts where the pipeline ends. Tasks arrive from the business as tickets with a goal and an economic rationale: 'find out why conversion dropped', 'assess demand for this programme', 'understand why existing customers call sales'. I build the cut, validate the sample and deliver an answer that can be acted on: what is happening, what supports it, and what the data cannot show. Reports are discussed with department heads and top management; each has a stakeholder and a usefulness score.">Вторая половина моей работы начинается там, где заканчивается пайплайн. Задачи приходят от бизнеса как заявки с целью и экономическим обоснованием: «понять, почему упала конверсия», «оценить спрос на программу», «выяснить, зачем к нам приходят действующие клиенты». Я собираю по такой заявке разрез, проверяю выборку и приношу ответ в виде, пригодном для решения: что происходит, чем это подтверждается и чего эти данные не показывают. Отчёты обсуждаются с руководителями направлений и топ-менеджментом, у каждого есть заказчик и оценка полезности.</p>
+
+    <div class="grid g4" style="margin-bottom:1px">
+      <div class="cell"><p class="numsm" data-ru="до 3 000" data-en="up to 3,000">до 3 000</p><p class="cap" data-ru="сделок в одном исследовании" data-en="deals in a single study">сделок в одном исследовании</p></div>
+      <div class="cell"><p class="numsm" data-ru="до 6 месяцев" data-en="up to 6 months">до 6 месяцев</p><p class="cap" data-ru="горизонт сравнения периодов" data-en="period-comparison horizon">горизонт сравнения периодов</p></div>
+      <div class="cell"><p class="numsm" data-ru="десятки признаков" data-en="dozens of features">десятки признаков</p><p class="cap" data-ru="на сделку в глубоком разборе" data-en="per deal in a deep-dive study">на сделку в глубоком разборе</p></div>
+      <div class="cell"><p class="numsm" data-ru="все каналы" data-en="every channel">все каналы</p><p class="cap" data-ru="звонки и переписка всех сотрудников, кто общается с клиентом" data-en="calls and chats of every employee who talks to customers">звонки и переписка всех сотрудников, кто общается с клиентом</p></div>
+    </div>
+
+    <div class="grid g3">
+      <article class="card">
+        <p class="kicker" data-ru="кейс · продажи и трафик" data-en="case · sales and traffic">кейс · продажи и трафик</p>
+        <p class="ask"><b data-ru="запрос бизнеса" data-en="business request">запрос бизнеса</b><span data-ru="«Понять причины снижения конверсии в мае и изменение структуры продаж тарифов»" data-en="&quot;Find the reasons behind the May conversion drop and the shift in plan mix&quot;">«Понять причины снижения конверсии в мае и изменение структуры продаж тарифов»</span></p>
+        <h3 data-ru="Конверсия упала не там, где искали" data-en="Conversion fell somewhere else than expected">Конверсия упала не там, где искали</h3>
+        <p data-ru="Разбор всех содержательных разговоров по продукту за три месяца: недозвоны и пустые звонки исключены из базы, а не растворены в процентах. По каждой сделке — десятки признаков: потребность, готовность к покупке, тариф, возражения и их отработка, упомянутые конкуренты, поведение менеджера, охват новых блоков презентации." data-en="Every substantive conversation for a product line across three months: unanswered and empty calls were excluded from the base, not diluted into percentages. Dozens of features per deal — need, purchase readiness, plan, objections and how they were handled, competitors mentioned, rep behaviour, coverage of new pitch blocks.">Разбор всех содержательных разговоров по продукту за три месяца: недозвоны и пустые звонки исключены из базы, а не растворены в процентах. По каждой сделке — десятки признаков: потребность, готовность к покупке, тариф, возражения и их отработка, упомянутые конкуренты, поведение менеджера, охват новых блоков презентации.</p>
+        <p data-ru="Помесячное сравнение показало, что дело не в отделе продаж: входящий трафик остывал, доля готовых к покупке падала, денежные возражения росли. В отчёте наблюдения отделены от объяснений — «доля горячих клиентов снизилась» это факт, «поэтому упала выручка» это гипотеза, и она помечена как гипотеза с указанием, чем её проверить." data-en="The month-over-month view showed the problem was not the sales team: inbound traffic was cooling, the share of purchase-ready customers was falling, money objections were growing. Observations are separated from explanations — 'the share of hot leads fell' is a fact, 'therefore revenue dropped' is a hypothesis, labelled as one, with a note on how to test it.">Помесячное сравнение показало, что дело не в отделе продаж: входящий трафик остывал, доля готовых к покупке падала, денежные возражения росли. В отчёте наблюдения отделены от объяснений — «доля горячих клиентов снизилась» это факт, «поэтому упала выручка» это гипотеза, и она помечена как гипотеза с указанием, чем её проверить.</p>
+        <p class="rule" data-ru="→ решения по закупке трафика, скрипту и презентации тарифов." data-en="→ decisions on traffic buying, script and pricing pitch.">→ решения по закупке трафика, скрипту и презентации тарифов.</p>
+      </article>
+
+      <article class="card">
+        <p class="kicker" data-ru="кейс · продукт и цена" data-en="case · product and pricing">кейс · продукт и цена</p>
+        <p class="ask"><b data-ru="запрос бизнеса" data-en="business request">запрос бизнеса</b><span data-ru="«Причины отказов и есть ли у клиентов запрос на программы дополнительного образования»" data-en="&quot;Reasons for refusal, and whether customers ask for further-education programmes&quot;">«Причины отказов и есть ли у клиентов запрос на программы дополнительного образования»</span></p>
+        <h3 data-ru="«Дорого» — это не всегда про цену" data-en="&quot;Too expensive&quot; is not always about price">«Дорого» — это не всегда про цену</h3>
+        <p data-ru="Записи, которые не прошли через сервис, исключены явно — с указанием потери прямо в отчёте, а не тихо. Выборка задана фильтром: разговоры от пяти минут по конкретной продуктовой линейке. Причины отсутствия покупки разложены на два уровня: сначала укрупнённая категория, затем вторичный разбор двух самых больших групп." data-en="Records that did not pass through the service were excluded explicitly — with the loss stated in the report rather than quietly dropped. The sample is defined by a filter: conversations over five minutes on a specific product line. Reasons for no purchase are broken down on two levels: a top-level category first, then a second-level breakdown of the two largest groups.">Записи, которые не прошли через сервис, исключены явно — с указанием потери прямо в отчёте, а не тихо. Выборка задана фильтром: разговоры от пяти минут по конкретной продуктовой линейке. Причины отсутствия покупки разложены на два уровня: сначала укрупнённая категория, затем вторичный разбор двух самых больших групп.</p>
+        <p data-ru="Второй уровень меняет решение. «Стоимость» наверху выглядит как просьба о скидке, а внутри группы преобладает другое — клиент не может оформить рассрочку. Это уже не работа с ценой, а работа с платёжными инструментами. Каждая категория подтверждается репликой клиента, поэтому вывод можно перепроверить, а не принять на веру." data-en="The second level changes the decision. 'Cost' at the top looks like a discount request, but inside the group something else dominates — the customer cannot get instalment financing. That is not a pricing problem, it is a payment-instrument problem. Every category is backed by a customer quote, so the conclusion can be re-checked instead of taken on trust.">Второй уровень меняет решение. «Стоимость» наверху выглядит как просьба о скидке, а внутри группы преобладает другое — клиент не может оформить рассрочку. Это уже не работа с ценой, а работа с платёжными инструментами. Каждая категория подтверждается репликой клиента, поэтому вывод можно перепроверить, а не принять на веру.</p>
+        <p class="rule" data-ru="→ платёжные сценарии, работа с отказами по рассрочке и отдельная оценка спроса на программы с документом об образовании." data-en="→ payment scenarios, handling financing rejections, and a separate demand assessment for programmes with a formal diploma.">→ платёжные сценарии, работа с отказами по рассрочке и отдельная оценка спроса на программы с документом об образовании.</p>
+      </article>
+
+      <article class="card">
+        <p class="kicker" data-ru="кейс · процессы и упущенная выручка" data-en="case · operations and lost revenue">кейс · процессы и упущенная выручка</p>
+        <p class="ask"><b data-ru="запрос бизнеса" data-en="business request">запрос бизнеса</b><span data-ru="«Понять реальные причины обращений действующих клиентов и найти точки роста в клиентском пути»" data-en="&quot;Understand why existing customers contact sales and find growth points in the customer journey&quot;">«Понять реальные причины обращений действующих клиентов и найти точки роста в клиентском пути»</span></p>
+        <h3 data-ru="Часть работы отдела продаж — не продажи" data-en="Part of the sales team's load is not sales">Часть работы отдела продаж — не продажи</h3>
+        <p data-ru="Все сделки, закрытые с причиной «действующий клиент», за несколько месяцев. В отчёте явно указано, сколько обращений дошло до расчёта и что в него не попало. Каждое обращение разложено по смыслу и по адресату: продажи, возвраты или поддержка, плюс помесячная динамика, чтобы отличить разовый всплеск от устойчивой нагрузки." data-en="Every deal closed under the 'existing customer' reason across several months. The report states explicitly how many requests reached the calculation and what did not. Each request is classified by meaning and by owner: sales, refunds or support, plus a month-over-month view to tell a one-off spike from a persistent load.">Все сделки, закрытые с причиной «действующий клиент», за несколько месяцев. В отчёте явно указано, сколько обращений дошло до расчёта и что в него не попало. Каждое обращение разложено по смыслу и по адресату: продажи, возвраты или поддержка, плюс помесячная динамика, чтобы отличить разовый всплеск от устойчивой нагрузки.</p>
+        <p data-ru="Отдельно я искал упущенные продажи: случаи, где клиент фактически хотел купить новое, а сделку закрыли как «действующий клиент». Заодно выяснилось, что заметная часть входящего потока — сервисные вопросы и работа с уже оплаченными деньгами. Это не только нагрузка не на тот отдел: пока такие обращения лежат в знаменателе, конверсия отдела измеряется неверно." data-en="Separately I looked for lost sales: cases where the customer actually wanted to buy something new, but the deal was closed as 'existing customer'. It also turned out that a significant part of the inbound flow is service questions and work with money already paid. That is not only load on the wrong team: while those requests sit in the denominator, the team's conversion rate is measured wrong.">Отдельно я искал упущенные продажи: случаи, где клиент фактически хотел купить новое, а сделку закрыли как «действующий клиент». Заодно выяснилось, что заметная часть входящего потока — сервисные вопросы и работа с уже оплаченными деньгами. Это не только нагрузка не на тот отдел: пока такие обращения лежат в знаменателе, конверсия отдела измеряется неверно.</p>
+        <p class="rule" data-ru="→ маршрутизация обращений между отделами, возврат упущенных сделок в продажи и корректный знаменатель конверсии." data-en="→ routing requests between teams, returning lost deals to sales, and a correct conversion denominator.">→ маршрутизация обращений между отделами, возврат упущенных сделок в продажи и корректный знаменатель конверсии.</p>
+      </article>
+    </div>
+
+    <div class="grid g2" style="margin-top:1px">
+      <div class="card">
+        <p class="kicker" data-ru="правила, которые я не нарушаю" data-en="rules I do not break">правила, которые я не нарушаю</p>
+        <ul class="list">
+          <li data-ru="Контроль выборки: сколько записей вошло, сколько потеряно и почему — до всех процентов." data-en="Sample control: how many records were included, how many were lost and why — before any percentages.">Контроль выборки: сколько записей вошло, сколько потеряно и почему — до всех процентов.</li>
+          <li data-ru="Знаменатель у каждой доли, и при сравнении периодов он один и тот же." data-en="A denominator for every share, and the same one when periods are compared.">Знаменатель у каждой доли, и при сравнении периодов он один и тот же.</li>
+          <li data-ru="Наблюдение и объяснение разведены: гипотеза называется гипотезой и сопровождается способом проверки." data-en="Observation and explanation are kept apart: a hypothesis is called a hypothesis and comes with a way to test it.">Наблюдение и объяснение разведены: гипотеза называется гипотезой и сопровождается способом проверки.</li>
+          <li data-ru="Каждая категория подтверждается цитатой клиента, а отдельный лист позволяет заказчику проверить разметку руками." data-en="Every category is backed by a customer quote, and a separate sheet lets the stakeholder verify the labelling by hand.">Каждая категория подтверждается цитатой клиента, а отдельный лист позволяет заказчику проверить разметку руками.</li>
+          <li data-ru="Раздел ограничений: чего эти данные не показывают и какой вывод из них делать нельзя." data-en="A limitations section: what the data does not show and which conclusions it cannot support.">Раздел ограничений: чего эти данные не показывают и какой вывод из них делать нельзя.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="kicker" data-ru="почему это быстро" data-en="why this is fast">почему это быстро</p>
+        <h3 data-ru="Одна цепочка от разговора до решения" data-en="One chain from conversation to decision">Одна цепочка от разговора до решения</h3>
+        <p data-ru="Я не жду выгрузку от смежной команды. Извлечение признаков — часть системы, которую я сам построил, поэтому я знаю, откуда взялось каждое поле, где модель ошибается чаще всего и какой выборке можно верить. Новый бизнес-вопрос обычно означает новый разрез по уже размеченным данным, а не новый проект с нуля." data-en="I do not wait for an export from a neighbouring team. Feature extraction is part of the system I built myself, so I know where every field comes from, where the model errs most often and which sample can be trusted. A new business question usually means a new cut of already-labelled data, not a new project from scratch.">Я не жду выгрузку от смежной команды. Извлечение признаков — часть системы, которую я сам построил, поэтому я знаю, откуда взялось каждое поле, где модель ошибается чаще всего и какой выборке можно верить. Новый бизнес-вопрос обычно означает новый разрез по уже размеченным данным, а не новый проект с нуля.</p>
+        <p class="rule"><a href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener" data-ru="→ эта же методика на синтетических данных, с кодом и тестами" data-en="→ the same methodology on synthetic data, with code and tests">→ эта же методика на синтетических данных, с кодом и тестами</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §05 TRADE-OFFS ───────────────────────────────────────────────── -->
+<section id="decisions">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§05 / <span data-ru="инженерные решения" data-en="engineering decisions">инженерные решения</span></p>
+        <h2 data-ru="Что я выбрал и от чего отказался" data-en="What I chose and what I turned down">Что я выбрал и от чего отказался</h2>
+      </div>
+      <p class="eyebrow" data-ru="решение · альтернатива · условие пересмотра" data-en="decision · alternative · revisit condition">решение · альтернатива · условие пересмотра</p>
+    </div>
+
+    <div class="grid g2">
+      <article class="card">
+        <p class="kicker">stt</p>
+        <h3 data-ru="Управляемый STT вместо своего Whisper" data-en="Managed STT instead of self-hosted Whisper">Управляемый STT вместо своего Whisper</h3>
+        <div class="vs">
+          <div class="pick" data-ru="Взял <b>управляемый сервис</b>: качество на спонтанной телефонной речи и разделение говорящих из коробки, предсказуемая цена за минуту, ноль эксплуатации." data-en="Chose <b>a managed service</b>: quality on spontaneous phone speech and speaker separation out of the box, predictable per-minute price, zero operations.">Взял <b>управляемый сервис</b>: качество на спонтанной телефонной речи и разделение говорящих из коробки, предсказуемая цена за минуту, ноль эксплуатации.</div>
+          <div class="alt" data-ru="Отказался от своего Whisper на GPU: дешевле на объёме, но это железо, очередь, дежурство и просадка качества на шумных линиях, которую пришлось бы чинить самому." data-en="Turned down self-hosted Whisper on GPU: cheaper at volume, but that means hardware, a queue, on-call duty and quality loss on noisy lines that I would have to fix myself.">Отказался от своего Whisper на GPU: дешевле на объёме, но это железо, очередь, дежурство и просадка качества на шумных линиях, которую пришлось бы чинить самому.</div>
+        </div>
+        <p class="rule" data-ru="Пересмотрю, когда объём сделает разницу в цене больше стоимости эксплуатации: тогда гибрид — массовый поток на своём, сложные записи в облако." data-en="I will revisit it when volume makes the price gap larger than the cost of operations: then a hybrid — bulk traffic in-house, hard recordings in the cloud.">Пересмотрю, когда объём сделает разницу в цене больше стоимости эксплуатации: тогда гибрид — массовый поток на своём, сложные записи в облако.</p>
+      </article>
+
+      <article class="card">
+        <p class="kicker">retrieval</p>
+        <h3 data-ru="pgvector вместо отдельной векторной базы" data-en="pgvector instead of a dedicated vector database">pgvector вместо отдельной векторной базы</h3>
+        <div class="vs">
+          <div class="pick" data-ru="Взял <b>pgvector в том же PostgreSQL</b>: поиск живёт рядом с бизнес-фильтрами — клиент, продукт, период. Это один запрос вместо двух хранилищ и синхронизации между ними." data-en="Chose <b>pgvector in the same PostgreSQL</b>: search lives next to the business filters — customer, product, period. One query instead of two stores and the sync between them.">Взял <b>pgvector в том же PostgreSQL</b>: поиск живёт рядом с бизнес-фильтрами — клиент, продукт, период. Это один запрос вместо двух хранилищ и синхронизации между ними.</div>
+          <div class="alt" data-ru="Отказался от выделенной векторной БД: быстрее на миллионах векторов и богаче по фильтрации, но это ещё один сервис, бэкапы и точка отказа ради выигрыша, которого на текущем объёме не видно." data-en="Turned down a dedicated vector database: faster on millions of vectors and richer in filtering, but another service, another backup policy and another point of failure for a gain invisible at current volume.">Отказался от выделенной векторной БД: быстрее на миллионах векторов и богаче по фильтрации, но это ещё один сервис, бэкапы и точка отказа ради выигрыша, которого на текущем объёме не видно.</div>
+        </div>
+        <p class="rule" data-ru="Порог перехода известен заранее: когда время поиска станет заметным на фоне времени модели или индекс перестанет помещаться в память." data-en="The migration threshold is set in advance: when retrieval time becomes noticeable next to model time, or the index stops fitting in memory.">Порог перехода известен заранее: когда время поиска станет заметным на фоне времени модели или индекс перестанет помещаться в память.</p>
+      </article>
+
+      <article class="card">
+        <p class="kicker">evaluation</p>
+        <h3 data-ru="Оценка моделью против замороженной разметки" data-en="Model scoring against a frozen label set">Оценка моделью против замороженной разметки</h3>
+        <div class="vs">
+          <div class="pick" data-ru="Взял <b>LLM-судью и экспертный golden set</b>: критерии меняются вместе с регламентом, а судья ещё и объясняет решение — это можно показать руководителю и оспорить." data-en="Chose <b>an LLM judge and an expert golden set</b>: criteria change together with the policy, and the judge explains its decision — which can be shown to a manager and challenged.">Взял <b>LLM-судью и экспертный golden set</b>: критерии меняются вместе с регламентом, а судья ещё и объясняет решение — это можно показать руководителю и оспорить.</div>
+          <div class="alt" data-ru="Отказался обучать классификатор под каждый критерий: стабильнее и дешевле в инференсе, но каждая правка регламента требует новой разметки, а правок десятки за квартал." data-en="Turned down training a classifier per criterion: more stable and cheaper at inference, but every policy edit needs new labelling, and there are dozens per quarter.">Отказался обучать классификатор под каждый критерий: стабильнее и дешевле в инференсе, но каждая правка регламента требует новой разметки, а правок десятки за квартал.</div>
+        </div>
+        <p class="rule" data-ru="Плата за это — дрейф судьи при смене версии модели. Поэтому набор заморожен, а сравнение всегда идёт на одной и той же разметке." data-en="The price is judge drift when the model version changes. That is why the set is frozen and every comparison runs on the same labels.">Плата за это — дрейф судьи при смене версии модели. Поэтому набор заморожен, а сравнение всегда идёт на одной и той же разметке.</p>
+      </article>
+
+      <article class="card">
+        <p class="kicker" data-ru="переезд на дешёвую модель" data-en="migration to a cheaper model">переезд на дешёвую модель</p>
+        <h3 data-ru="Что ломается первым и как это ловится" data-en="What breaks first and how it is caught">Что ломается первым и как это ловится</h3>
+        <p data-ru="При переносе сценария на модель в разы дешевле «качество вообще» падает не первым. Первыми ломаются длинный контекст и стабильность формата: чаще встречается невалидная схема ответа, а на редких критических категориях проседает полнота. Средняя точность при этом выглядит нормально и не показывает ничего." data-en="When a scenario moves to a model several times cheaper, overall quality is not what falls first. Long context and format stability break first: invalid output schemas appear more often, and recall drops on rare critical categories. Average accuracy looks fine and shows nothing.">При переносе сценария на модель в разы дешевле «качество вообще» падает не первым. Первыми ломаются длинный контекст и стабильность формата: чаще встречается невалидная схема ответа, а на редких критических категориях проседает полнота. Средняя точность при этом выглядит нормально и не показывает ничего.</p>
+        <p data-ru="Поэтому релиз блокируется по двум вещам: валидность схемы и полнота на критических нарушениях. Лечится сжатием контекста, переносом части правил из промта в код, примерами на ошибочных классах и отдельным проходом по критическим категориям." data-en="So the release is gated on two things: schema validity and recall on critical violations. The fixes are context compression, moving part of the rules from the prompt into code, examples for the failing classes, and a separate pass for critical categories.">Поэтому релиз блокируется по двум вещам: валидность схемы и полнота на критических нарушениях. Лечится сжатием контекста, переносом части правил из промта в код, примерами на ошибочных классах и отдельным проходом по критическим категориям.</p>
+        <p class="rule" data-ru="Результат — тот же валидированный вывод при −88% стоимости сценария. Там, где цена ошибки высокая, человек остаётся в петле: это осознанное ограничение, а не недоделка." data-en="The result is the same validated output at −88% scenario cost. Where the cost of a mistake is high, a human stays in the loop: a deliberate limit, not an unfinished feature.">Результат — тот же валидированный вывод при −88% стоимости сценария. Там, где цена ошибки высокая, человек остаётся в петле: это осознанное ограничение, а не недоделка.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── §06 LEAD CHAT ────────────────────────────────────────────────── -->
+<section id="leadchat">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§06 / <span data-ru="флагман 02" data-en="flagship 02">флагман 02</span> · <span data-ru="независимый saas" data-en="independent saas">независимый saas</span> · leadchat.online</p>
+        <h2 data-ru="Lead Chat: AI-платформа продаж с оплатой за результат" data-en="Lead Chat: a pay-per-result AI sales platform">Lead Chat: AI-платформа продаж с оплатой за результат</h2>
+      </div>
+      <p class="eyebrow accent" data-ru="50 ₽ за созданный лид — не за сообщения" data-en="50 ₽ per created lead — not per message">50 ₽ за созданный лид — не за сообщения</p>
+    </div>
+
+    <p class="lead" style="margin:0 0 26px" data-ru="Собственный продукт, а не демо: агент ведёт диалог по бизнес-цели, квалифицирует клиента, отрабатывает возражения, отвечает по базе знаний и совершает действия — записывает, собирает контакт, отдаёт лид в CRM. Я отвечаю за продуктовую концепцию, AI-логику и ключевую архитектуру. С технической стороны со мной работает партнёр-разработчик: отдельные компоненты и тестирование кода. Продуктовые метрики закрыты и обсуждаются отдельно." data-en="A real product, not a demo: the agent runs a goal-driven dialogue, qualifies the customer, handles objections, answers from the knowledge base and takes actions — books, captures the contact, pushes the lead into CRM. I own the product concept, AI logic and core architecture. A development partner works with me on the technical side: selected components and code testing. Product metrics are confidential and discussed separately.">Собственный продукт, а не демо: агент ведёт диалог по бизнес-цели, квалифицирует клиента, отрабатывает возражения, отвечает по базе знаний и совершает действия — записывает, собирает контакт, отдаёт лид в CRM. Я отвечаю за продуктовую концепцию, AI-логику и ключевую архитектуру. С технической стороны со мной работает партнёр-разработчик: отдельные компоненты и тестирование кода. Продуктовые метрики закрыты и обсуждаются отдельно.</p>
+
+    <div class="grid g4">
+      <div class="cell"><h3 data-ru="База знаний" data-en="Knowledge base">База знаний</h3><p class="cap" data-ru="Сайты и офисные файлы нормализуются в чанки и эмбеддинги, индексируются в pgvector с ключевым поиском как запасным вариантом." data-en="Websites and office files are normalised into chunks and embeddings, indexed in pgvector with keyword search as a fallback.">Сайты и офисные файлы нормализуются в чанки и эмбеддинги, индексируются в pgvector с ключевым поиском как запасным вариантом.</p></div>
+      <div class="cell"><h3 data-ru="Ядро агента" data-en="Agent runtime">Ядро агента</h3><p class="cap" data-ru="Бизнес-цель, этапы диалога, квалификация, возражения, опора на источники, ограничения и память длинного диалога." data-en="Business goal, dialogue stages, qualification, objections, grounding, guardrails and long-dialogue memory.">Бизнес-цель, этапы диалога, квалификация, возражения, опора на источники, ограничения и память длинного диалога.</p></div>
+      <div class="cell"><h3 data-ru="Действия и интеграции" data-en="Actions &amp; integrations">Действия и интеграции</h3><p class="cap" data-ru="Вызов функций для сбора лида, онлайн-записи и бизнес-действий; amoCRM, Bitrix24, Telegram, email." data-en="Function calling for lead capture, online booking and business actions; amoCRM, Bitrix24, Telegram, email.">Вызов функций для сбора лида, онлайн-записи и бизнес-действий; amoCRM, Bitrix24, Telegram, email.</p></div>
+      <div class="cell"><h3 data-ru="Платформа и биллинг" data-en="Platform &amp; billing">Платформа и биллинг</h3><p class="cap" data-ru="Веб-виджет, фоновые задачи, биллинг по результату и аналитика конверсии." data-en="Web widget, background jobs, result-based billing and conversion analytics.">Веб-виджет, фоновые задачи, биллинг по результату и аналитика конверсии.</p></div>
+    </div>
+
+    <div class="chips" style="margin-top:22px">
+      <span>Next.js</span><span>Node.js</span><span>tRPC</span><span>Prisma</span><span>PostgreSQL / pgvector</span><span>RAG</span><span>tool calling</span><span>background jobs</span><span>payments</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="https://leadchat.online/" target="_blank" rel="noopener" data-ru="Открыть работающий продукт ↗" data-en="Open the live product ↗">Открыть работающий продукт ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── §07 SYSTEMS ──────────────────────────────────────────────────── -->
+<section id="systems">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§07 / production-<span data-ru="системы" data-en="systems">системы</span></p>
+        <h2 data-ru="Промт — это один компонент из десяти" data-en="A prompt is one component out of ten">Промт — это один компонент из десяти</h2>
+      </div>
+      <p class="eyebrow" data-ru="голос · rag · оценка · экономика" data-en="voice · rag · evaluation · economics">голос · rag · оценка · экономика</p>
+    </div>
+
+    <div class="grid g2">
+      <article class="card">
+        <p class="kicker">voice ai</p>
+        <p class="num">45–50%</p>
+        <p class="cap" data-ru="подходящих типовых консультаций проходит без оператора" data-en="of eligible routine consultations run without an operator">подходящих типовых консультаций проходит без оператора</p>
+        <p style="margin-top:14px" data-ru="Перевёл регламент контакт-центра в живой диалог с состоянием: перебивания, уточнения, ветвление по скрипту, ответы из базы знаний. Агент отвечает мгновенно, работает круглосуточно и не забывает нюансы продукта — там, где у внешнего контакт-центра результат зависит от того, какой менеджер взял трубку." data-en="I turned the contact-centre policy into a live stateful dialogue: barge-in, clarifications, script branching, answers from the knowledge base. The agent replies instantly, works around the clock and never forgets product details — where an outsourced contact centre depends on which rep picked up.">Перевёл регламент контакт-центра в живой диалог с состоянием: перебивания, уточнения, ветвление по скрипту, ответы из базы знаний. Агент отвечает мгновенно, работает круглосуточно и не забывает нюансы продукта — там, где у внешнего контакт-центра результат зависит от того, какой менеджер взял трубку.</p>
+        <p class="rule" data-ru="Отсюда ×1,2 квалифицированных лидов в первый месяц: больше дозвонов, мгновенный ответ, полный охват скрипта и стабильное знание продукта. Экономия — от 1 млн ₽ в месяц." data-en="Hence ×1.2 qualified leads in month one: more answered calls, instant replies, full script coverage and consistent product knowledge. Saving: from 1 million RUB per month.">Отсюда ×1,2 квалифицированных лидов в первый месяц: больше дозвонов, мгновенный ответ, полный охват скрипта и стабильное знание продукта. Экономия — от 1 млн ₽ в месяц.</p>
+      </article>
+
+      <article class="card">
+        <p class="kicker" data-ru="корпоративный rag" data-en="enterprise rag">корпоративный rag</p>
+        <p class="num">100+</p>
+        <p class="cap" data-ru="ежедневных внутренних пользователей" data-en="daily internal users">ежедневных внутренних пользователей</p>
+        <p style="margin-top:14px" data-ru="Два ассистента: по продажам и по корпоративной документации. Отвечал за нарезку документов, поиск, сборку контекста, опору на источники и качество ответа. Сотрудник получает ответ со ссылкой на документ меньше чем за 10 секунд вместо примерно пяти минут ручного поиска." data-en="Two assistants: one for sales, one for corporate documentation. I owned chunking, retrieval, context assembly, grounding and answer quality. An employee gets an answer with a source link in under 10 seconds instead of roughly five minutes of manual search.">Два ассистента: по продажам и по корпоративной документации. Отвечал за нарезку документов, поиск, сборку контекста, опору на источники и качество ответа. Сотрудник получает ответ со ссылкой на документ меньше чем за 10 секунд вместо примерно пяти минут ручного поиска.</p>
+        <p class="rule" data-ru="Основная работа здесь не в модели, а в подготовке документов и в том, чтобы ассистент честно говорил «в документах этого нет»." data-en="The real work here is not the model but document preparation — and making the assistant honestly say 'this is not in the documents'.">Основная работа здесь не в модели, а в подготовке документов и в том, чтобы ассистент честно говорил «в документах этого нет».</p>
+      </article>
+
+      <article class="card">
+        <p class="kicker" data-ru="оценка llm" data-en="llm evaluation">оценка llm</p>
+        <p class="num">4</p>
+        <p class="cap" data-ru="специализированных golden set" data-en="task-specific golden sets">специализированных golden set</p>
+        <p style="margin-top:14px" data-ru="Отдельные наборы и метрики под балльную оценку, саммари, смысловую аналитику и нарушения. Экспертная калибровка, регрессии и разбор ошибок после каждой смены модели. 98% совпадения решений — на замороженном наборе из 500 сделок." data-en="Separate sets and metrics for scoring, summaries, semantic analytics and violations. Human calibration, regressions and error analysis after every model change. 98% decision agreement — on a frozen set of 500 deals.">Отдельные наборы и метрики под балльную оценку, саммари, смысловую аналитику и нарушения. Экспертная калибровка, регрессии и разбор ошибок после каждой смены модели. 98% совпадения решений — на замороженном наборе из 500 сделок.</p>
+        <p class="rule"><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener" data-ru="→ методика и код в публичном репозитории" data-en="→ methodology and code in the public repository">→ методика и код в публичном репозитории</a></p>
+      </article>
+
+      <article class="card">
+        <p class="kicker" data-ru="экономика моделей" data-en="model economics">экономика моделей</p>
+        <p class="num">−88%</p>
+        <p class="cap" data-ru="стоимости ключевого LLM-сценария" data-en="of the key LLM scenario cost">стоимости ключевого LLM-сценария</p>
+        <p style="margin-top:14px" data-ru="Перенёс тот же валидированный результат с дорогой модели на компактную за счёт промта, контекста и пайплайна. Разница в прайсе — только половина дела: без сжатия контекста и переработки схемы ответа дешёвая модель не проходит гейты." data-en="I moved the same validated output from an expensive model to a compact one through prompt, context and pipeline work. The vendor price gap is only half the story: without context compression and a reworked output schema the cheap model does not pass the gates.">Перенёс тот же валидированный результат с дорогой модели на компактную за счёт промта, контекста и пайплайна. Разница в прайсе — только половина дела: без сжатия контекста и переработки схемы ответа дешёвая модель не проходит гейты.</p>
+        <p class="rule" data-ru="Стоимость считаю на 1 000 сделок и фиксирую снимок цен на дату — иначе сравнение «до и после» ничего не значит." data-en="I measure cost per 1,000 deals and freeze a dated pricing snapshot — otherwise a before/after comparison means nothing.">Стоимость считаю на 1 000 сделок и фиксирую снимок цен на дату — иначе сравнение «до и после» ничего не значит.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── §08 METHOD + STACK ───────────────────────────────────────────── -->
+<section id="method">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§08 / <span data-ru="метод и стек" data-en="method and stack">метод и стек</span></p>
+        <h2 data-ru="Один владелец пути от регламента до решения" data-en="One owner from policy to decision">Один владелец пути от регламента до решения</h2>
+      </div>
+    </div>
+
+    <div class="grid g5">
+      <div class="step"><span class="n">01</span><span><h3 data-ru="Формализую" data-en="Formalise">Формализую</h3><p class="cap" data-ru="перевожу регламент и пограничные случаи в проверяемое поведение" data-en="turn policy and edge cases into verifiable behaviour">перевожу регламент и пограничные случаи в проверяемое поведение</p></span></div>
+      <div class="step"><span class="n">02</span><span><h3 data-ru="Собираю" data-en="Build">Собираю</h3><p class="cap" data-ru="промты, схемы ответа, поиск, оркестрацию, хранение и API" data-en="prompts, output schemas, retrieval, orchestration, storage and APIs">промты, схемы ответа, поиск, оркестрацию, хранение и API</p></span></div>
+      <div class="step"><span class="n">03</span><span><h3 data-ru="Измеряю" data-en="Measure">Измеряю</h3><p class="cap" data-ru="golden sets, экспертная калибровка, регрессии, типология ошибок" data-en="golden sets, human calibration, regressions, error taxonomy">golden sets, экспертная калибровка, регрессии, типология ошибок</p></span></div>
+      <div class="step"><span class="n">04</span><span><h3 data-ru="Внедряю" data-en="Deploy">Внедряю</h3><p class="cap" data-ru="CRM, BI и рабочие процессы, где уже находится команда" data-en="CRM, BI and the workflows where the team already is">CRM, BI и рабочие процессы, где уже находится команда</p></span></div>
+      <div class="step"><span class="n">05</span><span><h3 data-ru="Объясняю" data-en="Explain">Объясняю</h3><p class="cap" data-ru="отчёт с ограничениями и решение, которое из него следует" data-en="a report with its limits and the decision that follows">отчёт с ограничениями и решение, которое из него следует</p></span></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:1px">
+      <div class="card">
+        <p class="kicker" data-ru="в production под моей ответственностью" data-en="in production, under my responsibility">в production под моей ответственностью</p>
+        <div class="chips prod">
+          <span>Python</span><span>TypeScript</span><span>FastAPI</span><span>Node.js</span><span>PostgreSQL</span><span>pgvector</span><span>Docker</span><span>OpenAI API</span><span>Anthropic API</span><span>GigaChat</span><span>YandexGPT</span><span>Dify</span><span>RAG</span><span>AI Agents</span><span>Structured Outputs</span><span>Tool Calling</span><span>LLM-as-a-Judge</span><span>Voice AI</span><span>CRM / BI</span><span>SQL</span><span>Git</span>
+        </div>
+      </div>
+      <div class="card">
+        <p class="kicker" data-ru="работал вне этого контура" data-en="worked with, outside that loop">работал вне этого контура</p>
+        <div class="chips">
+          <span>LangChain</span><span>LangGraph</span><span>Qdrant</span><span>vLLM</span><span>Hugging Face</span><span>Fine-tuning / LoRA</span><span>RAGAS</span><span>A/B Testing</span><span>Guardrails</span><span>Prompt Injection</span><span>NLP</span>
+        </div>
+        <p class="rule mutedtext" data-ru="Разделяю сознательно: слева то, что работает на реальном трафике и за что я отвечаю, справа — то, с чем работал вне этого контура." data-en="A deliberate split: on the left, what runs on real traffic and what I am responsible for; on the right, what I have worked with outside that loop.">Разделяю сознательно: слева то, что работает на реальном трафике и за что я отвечаю, справа — то, с чем работал вне этого контура.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §09 ABOUT ────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§09 / <span data-ru="позиционирование" data-en="positioning">позиционирование</span></p>
+        <h2 data-ru="Промт-инжиниринг — один слой. Я отвечаю за систему целиком." data-en="Prompt engineering is one layer. I own the whole system.">Промт-инжиниринг — один слой. Я отвечаю за систему целиком.</h2>
+      </div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <p data-ru="Работаю на стыке AI-инженерии, аналитики и продукта. Беру задачу в формулировке «сделайте так, чтобы это перестали делать руками» и довожу до системы, которая работает на реальном трафике, — и до отчёта, по которому принимают решение." data-en="I work where AI engineering, analytics and product meet. I take a task phrased as 'make this stop being done by hand' and carry it to a system running on real traffic — and to a report someone makes a decision on.">Работаю на стыке AI-инженерии, аналитики и продукта. Беру задачу в формулировке «сделайте так, чтобы это перестали делать руками» и довожу до системы, которая работает на реальном трафике, — и до отчёта, по которому принимают решение.</p>
+        <p data-ru="Людьми не руковожу: работаю в связке с разработчиками и сам закрываю AI-контур — от бизнес-регламента и промтов до пайплайнов, оценки, выгрузки в CRM и аналитики поверх. На встречах с руководителями направлений и топ-менеджментом я тот человек, который переводит бизнес-вопрос в то, что можно посчитать, и обратно — в решение." data-en="I do not manage people: I work alongside developers and own the AI loop myself — from business policy and prompts to pipelines, evaluation, CRM delivery and the analytics on top. In meetings with department heads and top management I am the person who turns a business question into something measurable, and back into a decision.">Людьми не руковожу: работаю в связке с разработчиками и сам закрываю AI-контур — от бизнес-регламента и промтов до пайплайнов, оценки, выгрузки в CRM и аналитики поверх. На встречах с руководителями направлений и топ-менеджментом я тот человек, который переводит бизнес-вопрос в то, что можно посчитать, и обратно — в решение.</p>
+      </div>
+      <div class="card">
+        <p class="kicker" data-ru="инженерные артефакты" data-en="engineering artefacts">инженерные артефакты</p>
+        <p data-ru="В публичных репозиториях лежит то же, что в проде, но на синтетике: контракт ответа, метрики, гейты релиза, готовый отчёт. Всё запускается одной командой и без ключа к модели." data-en="The public repositories hold what production holds, but on synthetic data: the output contract, the metrics, the release gates, a finished report. Everything runs with one command and no model key.">В публичных репозиториях лежит то же, что в проде, но на синтетике: контракт ответа, метрики, гейты релиза, готовый отчёт. Всё запускается одной командой и без ключа к модели.</p>
+        <ul class="list" style="margin-top:16px">
+          <li><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener">→ llm-evaluation-harness</a></li>
+          <li><a href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener">→ conversation-intelligence-lab</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ──────────────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="final wrap">
+    <p class="eyebrow accent">ai engineer &amp; data analyst · llm-<span data-ru="системы" data-en="systems">системы</span> · <span data-ru="аналитика для решений" data-en="analytics for decisions">аналитика для решений</span></p>
+    <h2 data-ru="Ищете человека, который доводит AI до production и до решения?" data-en="Looking for someone who takes AI to production — and to a decision?">Ищете человека, который доводит AI до production и до решения?</h2>
+    <p class="lead" data-ru="Открыт к Senior / Lead Applied AI ролям с end-to-end ответственностью: от бизнес-регламента до работающей системы, измеримого эффекта и отчёта, по которому действуют. Удалённо, UTC+3, рассматриваю зарубежные команды." data-en="Open to Senior / Lead Applied AI roles with end-to-end ownership: from business policy to a working system, a measurable effect and a report people act on. Remote, UTC+3, open to teams abroad.">Открыт к Senior / Lead Applied AI ролям с end-to-end ответственностью: от бизнес-регламента до работающей системы, измеримого эффекта и отчёта, по которому действуют. Удалённо, UTC+3, рассматриваю зарубежные команды.</p>
+    <div class="contacts">
+      <a class="btn primary" href="mailto:xpromx94@yandex.ru">xpromx94@yandex.ru</a>
+      <a class="btn" href="https://github.com/94spec" target="_blank" rel="noopener">github.com/94spec</a>
+      <a class="btn" href="/cv/" data-ru="Резюме и PDF" data-en="CV and PDF">Резюме и PDF</a>
+      <a class="btn" href="https://leadchat.online/" target="_blank" rel="noopener">leadchat.online</a>
+      <!-- Чтобы добавить Telegram или hh: раскомментируй нужную строку и подставь свой адрес.
+      <a class="btn" href="https://t.me/USERNAME" target="_blank" rel="noopener">telegram</a>
+      <a class="btn" href="https://hh.ru/resume/ID" target="_blank" rel="noopener">резюме на hh</a>
+      -->
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <span>© 2026 <span data-ru="Дмитрий Пром" data-en="Dmitry Prom">Дмитрий Пром</span></span>
+  <span data-ru="ai engineer &amp; data analyst · удалённо · utc+3" data-en="ai engineer &amp; data analyst · remote · utc+3">ai engineer &amp; data analyst · удалённо · utc+3</span>
+  <a href="mailto:xpromx94@yandex.ru">xpromx94@yandex.ru</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var nodes = document.querySelectorAll("[data-ru][data-en]");
+  var ruBtn = document.getElementById("lang-ru");
+  var enBtn = document.getElementById("lang-en");
+
+  function apply(lang) {
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      var value = lang === "en" ? el.getAttribute("data-en") : el.getAttribute("data-ru");
+      if (value !== null) el.innerHTML = value;
+    }
+    document.documentElement.lang = lang;
+    ruBtn.setAttribute("aria-pressed", String(lang === "ru"));
+    enBtn.setAttribute("aria-pressed", String(lang === "en"));
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+
+  ruBtn.addEventListener("click", function () { apply("ru"); });
+  enBtn.addEventListener("click", function () { apply("en"); });
+
+  var saved = null;
+  try { saved = localStorage.getItem("lang"); } catch (e) {}
+  if (!saved && navigator.language && navigator.language.slice(0, 2) !== "ru") saved = "en";
+  if (saved === "en") apply("en");
+})();
+</script>
+</body>
+</html>
