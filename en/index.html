@@ -86,6 +86,7 @@ img{max-width:100%;height:auto}
          padding:7px 12px;border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer}
 .langbox{display:flex;border:1px solid var(--line2)}
 .langbox .langlink{display:inline-flex;align-items:center;text-decoration:none;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:6px 10px;color:var(--muted)}
+.langbox .langlink:hover{color:var(--accent)}
 .langbox .langlink.current{background:var(--accent);color:var(--bg);font-weight:700}
 .langbox button{font:inherit;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
                 padding:6px 10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
@@ -880,7 +881,24 @@ title-prefixed  hybrid       100%  0.882        <b>100%        100%</b></pre>
 <script>
 (function () {
   "use strict";
-  // This page ships English in the markup; only the menu needs behaviour.
+  var menuBtn = document.getElementById("menu");
+  var nav = document.getElementById("nav");
+  function setMenu(open) {
+    nav.setAttribute("data-open", String(open));
+    menuBtn.setAttribute("aria-expanded", String(open));
+  }
+  menuBtn.addEventListener("click", function () {
+    setMenu(nav.getAttribute("data-open") !== "true");
+  });
+  // A menu that stays open over the section you just chose is worse than none.
+  nav.addEventListener("click", function (event) {
+    if (event.target.tagName === "A") setMenu(false);
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") setMenu(false);
+  });
+
+
 })();
 </script>
 </body>

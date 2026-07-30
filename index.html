@@ -85,6 +85,9 @@ img{max-width:100%;height:auto}
 .menubtn{display:none;font:inherit;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
          padding:7px 12px;border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer}
 .langbox{display:flex;border:1px solid var(--line2)}
+.langbox .langlink{display:inline-flex;align-items:center;text-decoration:none;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:6px 10px;color:var(--muted)}
+.langbox .langlink:hover{color:var(--accent)}
+.langbox .langlink.current{background:var(--accent);color:var(--bg);font-weight:700}
 .langbox button{font:inherit;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
                 padding:6px 10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
 .langbox button[aria-pressed="true"]{background:var(--accent);color:var(--bg);font-weight:700}
@@ -258,8 +261,8 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     <button type="button" class="menubtn" id="menu" aria-expanded="false" aria-controls="nav"
             data-ru="разделы" data-en="sections">разделы</button>
     <div class="langbox" role="group" aria-label="Язык / Language">
-      <button type="button" id="lang-ru" aria-pressed="true">ru</button>
-      <button type="button" id="lang-en" aria-pressed="false">en</button>
+      <span class="langlink current" aria-current="page">ru</span>
+      <a class="langlink" href="/en/" hreflang="en">en</a>
     </div>
     <span class="status"><span class="dot" aria-hidden="true"></span><span data-ru="открыт к предложениям" data-en="open to offers">открыт к предложениям</span></span>
   </div>
@@ -878,22 +881,6 @@ title-prefixed  hybrid       100%  0.882        <b>100%        100%</b></pre>
 <script>
 (function () {
   "use strict";
-  var nodes = document.querySelectorAll("[data-ru][data-en]");
-  var ruBtn = document.getElementById("lang-ru");
-  var enBtn = document.getElementById("lang-en");
-
-  function apply(lang) {
-    for (var i = 0; i < nodes.length; i++) {
-      var el = nodes[i];
-      var value = lang === "en" ? el.getAttribute("data-en") : el.getAttribute("data-ru");
-      if (value !== null) el.innerHTML = value;
-    }
-    document.documentElement.lang = lang;
-    ruBtn.setAttribute("aria-pressed", String(lang === "ru"));
-    enBtn.setAttribute("aria-pressed", String(lang === "en"));
-    try { localStorage.setItem("lang", lang); } catch (e) {}
-  }
-
   var menuBtn = document.getElementById("menu");
   var nav = document.getElementById("nav");
   function setMenu(open) {
@@ -911,13 +898,7 @@ title-prefixed  hybrid       100%  0.882        <b>100%        100%</b></pre>
     if (event.key === "Escape") setMenu(false);
   });
 
-  ruBtn.addEventListener("click", function () { apply("ru"); });
-  enBtn.addEventListener("click", function () { apply("en"); });
 
-  var saved = null;
-  try { saved = localStorage.getItem("lang"); } catch (e) {}
-  if (!saved && navigator.language && navigator.language.slice(0, 2) !== "ru") saved = "en";
-  if (saved === "en") apply("en");
 })();
 </script>
 </body>

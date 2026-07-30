@@ -81,28 +81,15 @@ def build() -> str:
     text = re.sub(r'<meta name="twitter:title" content="[^"]*">',
                   f'<meta name="twitter:title" content="{EN_TITLE}">', text, count=1)
 
-    # Root-absolute asset paths keep working from /en/; the language buttons
-    # become links between the two URLs, because on this page the swap is done.
-    text = text.replace(
-        '      <button type="button" id="lang-ru" aria-pressed="true">ru</button>\n'
-        '      <button type="button" id="lang-en" aria-pressed="false">en</button>',
-        '      <a class="langlink" href="/" hreflang="ru">ru</a>\n'
-        '      <span class="langlink current" aria-current="page">en</span>')
-    text = text.replace(
-        ".langbox button{font:inherit;",
-        ".langbox .langlink{display:inline-flex;align-items:center;text-decoration:none;"
-        "font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:6px 10px;"
-        "color:var(--muted)}\n"
-        ".langbox .langlink.current{background:var(--accent);color:var(--bg);font-weight:700}\n"
-        ".langbox button{font:inherit;")
-
-    # The language script has nothing to do here: this page is already English.
-    text = re.sub(r"  var nodes = document\.querySelectorAll.*?if \(saved === \"en\"\) apply\(\"en\"\);",
-                  "  // This page ships English in the markup; only the menu needs behaviour.",
-                  text, flags=re.S)
-    text = text.replace('  ruBtn.addEventListener("click", function () { apply("ru"); });\n', "")
-    text = text.replace('  enBtn.addEventListener("click", function () { apply("en"); });\n', "")
-    text = re.sub(r"  var ruBtn = .*?\n  var enBtn = .*?\n", "", text)
+    # One URL per language, so the switch is a link on both pages — here it
+    # points back to Russian, and English is the page you are on.
+    switch_ru = ('      <span class="langlink current" aria-current="page">ru</span>\n'
+                 '      <a class="langlink" href="/en/" hreflang="en">en</a>')
+    switch_en = ('      <a class="langlink" href="/" hreflang="ru">ru</a>\n'
+                 '      <span class="langlink current" aria-current="page">en</span>')
+    if switch_ru not in text:
+        raise SystemExit("the language switch markup changed — update build_en.py")
+    text = text.replace(switch_ru, switch_en)
 
     return text
 
