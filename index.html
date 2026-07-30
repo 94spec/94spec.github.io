@@ -229,6 +229,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     <a href="#decisions" data-ru="решения" data-en="trade-offs">решения</a>
     <a href="#leadchat">lead chat</a>
     <a href="#systems" data-ru="системы" data-en="systems">системы</a>
+    <a href="#code" data-ru="код" data-en="code">код</a>
     <a href="/cv/" data-ru="резюме" data-en="cv">резюме</a>
     <a href="https://github.com/94spec" target="_blank" rel="noopener">github</a>
   </nav>
@@ -702,15 +703,67 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
       <div class="card">
         <p class="kicker" data-ru="инженерные артефакты" data-en="engineering artefacts">инженерные артефакты</p>
         <p data-ru="В публичных репозиториях лежит то же, что в проде, но на синтетике: сами промты как версионируемые контракты со схемой ответа, метрики и гейты релиза, готовый аналитический отчёт. Всё запускается одной командой и без ключа к модели." data-en="The public repositories hold what production holds, but on synthetic data: the prompts themselves as versioned contracts with output schemas, the metrics and release gates, a finished analytical report. Everything runs with one command and no model key.">В публичных репозиториях лежит то же, что в проде, но на синтетике: сами промты как версионируемые контракты со схемой ответа, метрики и гейты релиза, готовый аналитический отчёт. Всё запускается одной командой и без ключа к модели.</p>
-        <ul class="list" style="margin-top:16px">
-          <li><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener">→ llm-evaluation-harness</a></li>
-          <li><a href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener">→ conversation-intelligence-lab</a></li>
-          <li><a href="https://github.com/94spec/prompt-contracts" target="_blank" rel="noopener">→ prompt-contracts</a></li>
-          <li><a href="https://github.com/94spec/golden-set-builder" target="_blank" rel="noopener">→ golden-set-builder</a></li>
-          <li><a href="https://github.com/94spec/voice-agent-runtime" target="_blank" rel="noopener">→ voice-agent-runtime</a></li>
-          <li><a href="https://github.com/94spec/rag-grounding-lab" target="_blank" rel="noopener">→ rag-grounding-lab</a></li>
-        </ul>
+        <p class="rule"><a href="#code" data-ru="→ шесть репозиториев и что в каждом" data-en="→ six repositories and what is in each">→ шесть репозиториев и что в каждом</a></p>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── §10 PUBLIC CODE ──────────────────────────────────────────────── -->
+<section id="code">
+  <div class="sec wrap">
+    <div class="sechd">
+      <div>
+        <p class="eyebrow">§10 / <span data-ru="публичный код" data-en="public code">публичный код</span></p>
+        <h2 data-ru="Шесть репозиториев, которые можно открыть и запустить" data-en="Six repositories you can open and run">Шесть репозиториев, которые можно открыть и запустить</h2>
+      </div>
+      <p class="eyebrow accent" data-ru="10 000 строк python · без зависимостей · без ключа к модели" data-en="10,000 lines of python · no dependencies · no model key">10 000 строк python · без зависимостей · без ключа к модели</p>
+    </div>
+
+    <p class="lead" style="margin:0 0 26px" data-ru="Это clean-room реализации, написанные с нуля на синтетических данных, а не выгрузки из рабочих систем: ни строки кода работодателя, ни одного его документа, ни одного названия вендора. Каждый запускается одной командой офлайн, у каждого есть тесты и CI, который проверяет не только что код работает, но и что предохранители действительно срабатывают — подмена записи после заморозки, промт без схемы, реплика со ссылкой в голосовом канале, ответ с выдуманным числом." data-en="These are clean-room implementations, written from scratch on synthetic data rather than exported from working systems: no employer code, no employer documents, no vendor names. Each runs offline with one command, and each has tests and CI that check not only that the code works but that the guards actually fire — a record edited after freezing, a prompt without a schema, a reply with a link in a voice channel, an answer with an invented number.">Это clean-room реализации, написанные с нуля на синтетических данных, а не выгрузки из рабочих систем: ни строки кода работодателя, ни одного его документа, ни одного названия вендора. Каждый запускается одной командой офлайн, у каждого есть тесты и CI, который проверяет не только что код работает, но и что предохранители действительно срабатывают — подмена записи после заморозки, промт без схемы, реплика со ссылкой в голосовом канале, ответ с выдуманным числом.</p>
+
+    <div class="grid g3">
+      <article class="card">
+        <p class="kicker" data-ru="оценка llm" data-en="evaluating llm output">оценка llm</p>
+        <h3>llm-evaluation-harness</h3>
+        <p data-ru="Четыре класса задач, типизированная таксономия ошибок, bootstrap-интервалы и релизные гейты. Критический recall гейтится отдельно от средней точности — именно те пропуски, которые среднее прячет." data-en="Four task families, a typed error taxonomy, bootstrap intervals and release gates. Critical recall is gated separately from average accuracy — those are exactly the misses an average hides.">Четыре класса задач, типизированная таксономия ошибок, bootstrap-интервалы и релизные гейты. Критический recall гейтится отдельно от средней точности — именно те пропуски, которые среднее прячет.</p>
+        <p class="rule"><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 2 350 строк" data-en="→ open the repository · 2 350 lines">→ открыть репозиторий · 2 350 строк</a></p>
+      </article>
+      <article class="card">
+        <p class="kicker" data-ru="эталонные наборы" data-en="reference sets">эталонные наборы</p>
+        <h3>golden-set-builder</h3>
+        <p data-ru="Стратифицированный отбор, который сообщает, каких ячеек пул не дал. Согласованность разметчиков считается до любой метрики модели: она и есть потолок. Разрешение споров без голосования большинством, заморозка с хешем на каждую запись." data-en="Stratified sampling that reports which cells the pool could not fill. Annotator agreement is computed before any model metric, because it is the ceiling. Adjudication without majority vote, and freezing with a hash per record.">Стратифицированный отбор, который сообщает, каких ячеек пул не дал. Согласованность разметчиков считается до любой метрики модели: она и есть потолок. Разрешение споров без голосования большинством, заморозка с хешем на каждую запись.</p>
+        <p class="rule"><a href="https://github.com/94spec/golden-set-builder" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 594 строкии" data-en="→ open the repository · 1 594 lines">→ открыть репозиторий · 1 594 строкии</a></p>
+      </article>
+      <article class="card">
+        <p class="kicker" data-ru="промты как контракты" data-en="prompts as contracts">промты как контракты</p>
+        <h3>prompt-contracts</h3>
+        <p data-ru="У каждого промта схема ответа, правила отказа, бюджет размера и golden set, который гейтит его изменения. Команда diff отвечает на единственный вопрос ревьюера: нужно ли перезапускать оценку перед мержем." data-en="Every prompt ships an output schema, refusal rules, a size budget and the golden set that gates its changes. The diff command answers the only question a reviewer has: must evaluation be re-run before merging.">У каждого промта схема ответа, правила отказа, бюджет размера и golden set, который гейтит его изменения. Команда diff отвечает на единственный вопрос ревьюера: нужно ли перезапускать оценку перед мержем.</p>
+        <p class="rule"><a href="https://github.com/94spec/prompt-contracts" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 847 строк" data-en="→ open the repository · 847 lines">→ открыть репозиторий · 847 строк</a></p>
+      </article>
+      <article class="card">
+        <p class="kicker" data-ru="голосовой рантайм" data-en="voice runtime">голосовой рантайм</p>
+        <h3>voice-agent-runtime</h3>
+        <p data-ru="Политика диалога — таблица переходов, а не абзац в промте. Перебивание не доигрывает прерванную фразу. Бюджет задержки считается по этапам и судится по p95 против 3 секунд до первой реплики и 10 секунд на ход." data-en="The dialogue policy is a transition table, not a paragraph in the prompt. A barge-in never resumes the interrupted sentence. Latency is budgeted per stage and judged at p95 against 3 seconds to the first reply and 10 seconds per turn.">Политика диалога — таблица переходов, а не абзац в промте. Перебивание не доигрывает прерванную фразу. Бюджет задержки считается по этапам и судится по p95 против 3 секунд до первой реплики и 10 секунд на ход.</p>
+        <p class="rule"><a href="https://github.com/94spec/voice-agent-runtime" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 126 строк" data-en="→ open the repository · 1 126 lines">→ открыть репозиторий · 1 126 строк</a></p>
+      </article>
+      <article class="card">
+        <p class="kicker" data-ru="retrieval и обоснованность" data-en="retrieval and grounding">retrieval и обоснованность</p>
+        <h3>rag-grounding-lab</h3>
+        <p data-ru="Сколько стоит нарезка и где проигрывает каждая стратегия поиска — три поломки воспроизведены, а не спрятаны. Ответ проверяется по предложениям: выдуманное число ловится отдельно от неподтверждённой формулировки, а честный отказ засчитывается как обоснованный." data-en="What chunking costs and where each retrieval strategy loses — three failures reproduced rather than hidden. Answers are checked sentence by sentence: an invented number is caught separately from an unsupported phrasing, and an honest refusal counts as grounded.">Сколько стоит нарезка и где проигрывает каждая стратегия поиска — три поломки воспроизведены, а не спрятаны. Ответ проверяется по предложениям: выдуманное число ловится отдельно от неподтверждённой формулировки, а честный отказ засчитывается как обоснованный.</p>
+        <p class="rule"><a href="https://github.com/94spec/rag-grounding-lab" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 168 строк" data-en="→ open the repository · 1 168 lines">→ открыть репозиторий · 1 168 строк</a></p>
+      </article>
+      <article class="card">
+        <p class="kicker" data-ru="аналитика на выходах модели" data-en="analytics on model output">аналитика на выходах модели</p>
+        <h3>conversation-intelligence-lab</h3>
+        <p data-ru="Та же методика, что в разделе аналитики, на синтетических данных: строгий контракт вывода, проверка противоречий, трассируемые помесячные агрегаты и воспроизводимый отчёт." data-en="The methodology from the analytics section, on synthetic data: a strict output contract, contradiction checks, traceable monthly aggregates and a reproducible report.">Та же методика, что в разделе аналитики, на синтетических данных: строгий контракт вывода, проверка противоречий, трассируемые помесячные агрегаты и воспроизводимый отчёт.</p>
+        <p class="rule"><a href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 309 строк" data-en="→ open the repository · 309 lines">→ открыть репозиторий · 309 строк</a></p>
+      </article>
+    </div>
+
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/94spec" target="_blank" rel="noopener" data-ru="Все репозитории на GitHub ↗" data-en="All repositories on GitHub ↗">Все репозитории на GitHub ↗</a>
     </div>
   </div>
 </section>
