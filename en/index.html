@@ -843,14 +843,14 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     </div>
 
     <div class="out">
-<pre>$ ragl compare --top-k 3 --chunking title-prefixed
+<pre>$ ragl compare --top-k 1 --chunking title-prefixed
 
-chunking        retrieval     hit   nDCG  <b>paraphrase  exact-term</b>
+chunking        retrieval     hit   nDCG  paraphrase  <b>exact-term</b>
 
-title-prefixed  vector        94%  0.836         <b>90%        100%</b>
-title-prefixed  keyword       88%  0.828         <b>80%        100%</b>
-title-prefixed  hybrid       100%  0.882        <b>100%        100%</b></pre>
-      <p class="cap2" data-ru="Реальный вывод из rag-grounding-lab: hit — как часто нужный документ вообще нашёлся, nDCG — насколько высоко он оказался в списке. Последние две колонки — весь смысл: одна усреднённая цифра спрятала бы, что одна стратегия справляется с перефразировками, а другая — с точными идентификаторами. Именно так проверяется решение «на этом объёме гибридный поиск не нужен»: не мнением, а прогоном." data-en="Real output from rag-grounding-lab: hit is how often the right document was found at all, nDCG is how high it ranked. The last two columns are the whole point: a single averaged number would hide that one strategy handles paraphrases and the other handles exact identifiers. That is how the decision «hybrid retrieval is not needed at this size» gets checked — by running it, not by asserting it.">Real output from rag-grounding-lab: hit is how often the right document was found at all, nDCG is how high it ranked. The last two columns are the whole point: a single averaged number would hide that one strategy handles paraphrases and the other handles exact identifiers. That is how the decision «hybrid retrieval is not needed at this size» gets checked — by running it, not by asserting it.</p>
+title-prefixed  vector        75%  0.750         70%         <b>83%</b>
+title-prefixed  keyword       81%  0.812         70%        <b>100%</b>
+title-prefixed  hybrid        81%  0.812         70%        <b>100%</b></pre>
+      <p class="cap2" data-ru="Реальный вывод из rag-grounding-lab, по первой позиции выдачи. hit — как часто нужный документ вообще нашёлся, nDCG — насколько высоко он оказался. Смотреть надо на последнюю колонку: векторный поиск путает почти одинаковые коды, потому что «РГ-14.2» и «РГ-14.3» состоят почти из одних и тех же буквосочетаний, — а поиск по точному слову их различает. Отсюда правило вместо мнения: ключевой поиск окупается там, где в запросах есть артикулы, коды и номера версий. Там, где спрашивают обычными словами, как в базе на 37 документов, векторного достаточно." data-en="Real output from rag-grounding-lab, at rank one. hit is how often the right document was found at all, nDCG is how high it ranked. The column to read is the last one: vector search confuses two regulation codes that differ by a single digit, because they are made of almost the same character sequences, while exact word matching tells them apart. That gives a rule instead of an opinion: keyword search pays off where queries carry part numbers, codes and version strings. Where people ask in plain words, as in a 37-document base, vector retrieval is enough.">Real output from rag-grounding-lab, at rank one. hit is how often the right document was found at all, nDCG is how high it ranked. The column to read is the last one: vector search confuses two regulation codes that differ by a single digit, because they are made of almost the same character sequences, while exact word matching tells them apart. That gives a rule instead of an opinion: keyword search pays off where queries carry part numbers, codes and version strings. Where people ask in plain words, as in a 37-document base, vector retrieval is enough.</p>
     </div>
 
     <div class="sechd" style="margin:44px 0 26px">
