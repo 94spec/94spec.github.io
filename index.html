@@ -181,6 +181,17 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
 .list li{padding:11px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:12.5px}
 .list li:last-child{border-bottom:0}
 .list b{color:var(--ink);font-weight:700}
+.out{margin-top:18px;border:1px solid var(--line2);background:var(--panel);overflow-x:auto}
+.out pre{margin:0;padding:16px 18px;font-family:var(--mono);font-size:11.5px;line-height:1.7;
+         color:var(--muted);white-space:pre}
+.out pre b{color:var(--accent);font-weight:400}
+.out .cap2{padding:10px 18px;border-top:1px solid var(--line);font-size:11px;color:#6f7a68;
+           line-height:1.5;white-space:normal}
+.fix{padding:20px 22px}
+.fix h3{margin-bottom:8px}
+.fix p{color:var(--muted);font-size:12.5px}
+.fix .kept{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);
+           font-size:12px;color:var(--ink)}
 
 /* ─── cta / footer ──────────────────────────────────────────────────── */
 .final{padding:clamp(52px,7vw,86px) var(--pad);text-align:center}
@@ -515,7 +526,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
         <p class="kicker" data-ru="почему это быстро" data-en="why this is fast">почему это быстро</p>
         <h3 data-ru="Одна цепочка от разговора до решения" data-en="One chain from conversation to decision">Одна цепочка от разговора до решения</h3>
         <p data-ru="Я не жду выгрузку от смежной команды. Извлечение признаков — часть системы, которую я сам построил, поэтому я знаю, откуда взялось каждое поле, где модель ошибается чаще всего и какой выборке можно верить. Новый бизнес-вопрос обычно означает новый разрез по уже размеченным данным, а не новый проект с нуля." data-en="I do not wait for an export from a neighbouring team. Feature extraction is part of the system I built myself, so I know where every field comes from, where the model errs most often and which sample can be trusted. A new business question usually means a new cut of already-labelled data, not a new project from scratch.">Я не жду выгрузку от смежной команды. Извлечение признаков — часть системы, которую я сам построил, поэтому я знаю, откуда взялось каждое поле, где модель ошибается чаще всего и какой выборке можно верить. Новый бизнес-вопрос обычно означает новый разрез по уже размеченным данным, а не новый проект с нуля.</p>
-        <p class="rule"><a href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener" data-ru="→ эта же методика на синтетических данных, с кодом и тестами" data-en="→ the same methodology on synthetic data, with code and tests">→ эта же методика на синтетических данных, с кодом и тестами</a></p>
+        <p class="rule tested"><a href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener" data-ru="→ эта же методика на синтетических данных, с кодом и тестами" data-en="→ the same methodology on synthetic data, with code and tests">→ эта же методика на синтетических данных, с кодом и тестами</a></p>
       </div>
     </div>
   </div>
@@ -636,7 +647,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
         <p class="num">4</p>
         <p class="cap" data-ru="специализированных golden set" data-en="task-specific golden sets">специализированных golden set</p>
         <p style="margin-top:14px" data-ru="Отдельные наборы и метрики под балльную оценку, саммари, смысловую аналитику и нарушения. Экспертная калибровка, регрессии и разбор ошибок после каждой смены модели. 98% совпадения решений — на замороженном наборе из 500 сделок." data-en="Separate sets and metrics for scoring, summaries, semantic analytics and violations. Human calibration, regressions and error analysis after every model change. 98% decision agreement — on a frozen set of 500 deals.">Отдельные наборы и метрики под балльную оценку, саммари, смысловую аналитику и нарушения. Экспертная калибровка, регрессии и разбор ошибок после каждой смены модели. 98% совпадения решений — на замороженном наборе из 500 сделок.</p>
-        <p class="rule"><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener" data-ru="→ методика и код в публичном репозитории" data-en="→ methodology and code in the public repository">→ методика и код в публичном репозитории</a></p>
+        <p class="rule tested"><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener" data-ru="→ методика и код в публичном репозитории" data-en="→ methodology and code in the public repository">→ методика и код в публичном репозитории</a></p>
       </article>
 
       <article class="card">
@@ -728,37 +739,83 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
         <p class="kicker" data-ru="оценка llm" data-en="evaluating llm output">оценка llm</p>
         <h3>llm-evaluation-harness</h3>
         <p data-ru="Четыре класса задач, типизированная таксономия ошибок, bootstrap-интервалы и релизные гейты. Критический recall гейтится отдельно от средней точности — именно те пропуски, которые среднее прячет." data-en="Four task families, a typed error taxonomy, bootstrap intervals and release gates. Critical recall is gated separately from average accuracy — those are exactly the misses an average hides.">Четыре класса задач, типизированная таксономия ошибок, bootstrap-интервалы и релизные гейты. Критический recall гейтится отдельно от средней точности — именно те пропуски, которые среднее прячет.</p>
-        <p class="rule"><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 2 350 строк" data-en="→ open the repository · 2 350 lines">→ открыть репозиторий · 2 350 строк</a></p>
+        <p class="rule tested"><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 2 350 строк" data-en="→ open the repository · 2 350 lines">→ открыть репозиторий · 2 350 строк</a></p>
+        <p class="den" style="margin-top:8px" data-ru="тесты и CI на Python 3.11 и 3.12" data-en="tests and CI on Python 3.11 and 3.12">тесты и CI на Python 3.11 и 3.12</p>
       </article>
       <article class="card">
         <p class="kicker" data-ru="эталонные наборы" data-en="reference sets">эталонные наборы</p>
         <h3>golden-set-builder</h3>
         <p data-ru="Стратифицированный отбор, который сообщает, каких ячеек пул не дал. Согласованность разметчиков считается до любой метрики модели: она и есть потолок. Разрешение споров без голосования большинством, заморозка с хешем на каждую запись." data-en="Stratified sampling that reports which cells the pool could not fill. Annotator agreement is computed before any model metric, because it is the ceiling. Adjudication without majority vote, and freezing with a hash per record.">Стратифицированный отбор, который сообщает, каких ячеек пул не дал. Согласованность разметчиков считается до любой метрики модели: она и есть потолок. Разрешение споров без голосования большинством, заморозка с хешем на каждую запись.</p>
-        <p class="rule"><a href="https://github.com/94spec/golden-set-builder" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 594 строкии" data-en="→ open the repository · 1 594 lines">→ открыть репозиторий · 1 594 строкии</a></p>
+        <p class="rule tested"><a href="https://github.com/94spec/golden-set-builder" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 594 строкии" data-en="→ open the repository · 1 594 lines">→ открыть репозиторий · 1 594 строкии</a></p>
+        <p class="den" style="margin-top:8px" data-ru="тесты и CI на Python 3.11 и 3.12" data-en="tests and CI on Python 3.11 and 3.12">тесты и CI на Python 3.11 и 3.12</p>
       </article>
       <article class="card">
         <p class="kicker" data-ru="промты как контракты" data-en="prompts as contracts">промты как контракты</p>
         <h3>prompt-contracts</h3>
         <p data-ru="У каждого промта схема ответа, правила отказа, бюджет размера и golden set, который гейтит его изменения. Команда diff отвечает на единственный вопрос ревьюера: нужно ли перезапускать оценку перед мержем." data-en="Every prompt ships an output schema, refusal rules, a size budget and the golden set that gates its changes. The diff command answers the only question a reviewer has: must evaluation be re-run before merging.">У каждого промта схема ответа, правила отказа, бюджет размера и golden set, который гейтит его изменения. Команда diff отвечает на единственный вопрос ревьюера: нужно ли перезапускать оценку перед мержем.</p>
-        <p class="rule"><a href="https://github.com/94spec/prompt-contracts" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 847 строк" data-en="→ open the repository · 847 lines">→ открыть репозиторий · 847 строк</a></p>
+        <p class="rule tested"><a href="https://github.com/94spec/prompt-contracts" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 847 строк" data-en="→ open the repository · 847 lines">→ открыть репозиторий · 847 строк</a></p>
+        <p class="den" style="margin-top:8px" data-ru="тесты и CI на Python 3.11 и 3.12" data-en="tests and CI on Python 3.11 and 3.12">тесты и CI на Python 3.11 и 3.12</p>
       </article>
       <article class="card">
         <p class="kicker" data-ru="голосовой рантайм" data-en="voice runtime">голосовой рантайм</p>
         <h3>voice-agent-runtime</h3>
         <p data-ru="Политика диалога — таблица переходов, а не абзац в промте. Перебивание не доигрывает прерванную фразу. Бюджет задержки считается по этапам и судится по p95 против 3 секунд до первой реплики и 10 секунд на ход." data-en="The dialogue policy is a transition table, not a paragraph in the prompt. A barge-in never resumes the interrupted sentence. Latency is budgeted per stage and judged at p95 against 3 seconds to the first reply and 10 seconds per turn.">Политика диалога — таблица переходов, а не абзац в промте. Перебивание не доигрывает прерванную фразу. Бюджет задержки считается по этапам и судится по p95 против 3 секунд до первой реплики и 10 секунд на ход.</p>
-        <p class="rule"><a href="https://github.com/94spec/voice-agent-runtime" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 126 строк" data-en="→ open the repository · 1 126 lines">→ открыть репозиторий · 1 126 строк</a></p>
+        <p class="rule tested"><a href="https://github.com/94spec/voice-agent-runtime" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 126 строк" data-en="→ open the repository · 1 126 lines">→ открыть репозиторий · 1 126 строк</a></p>
+        <p class="den" style="margin-top:8px" data-ru="тесты и CI на Python 3.11 и 3.12" data-en="tests and CI on Python 3.11 and 3.12">тесты и CI на Python 3.11 и 3.12</p>
       </article>
       <article class="card">
         <p class="kicker" data-ru="retrieval и обоснованность" data-en="retrieval and grounding">retrieval и обоснованность</p>
         <h3>rag-grounding-lab</h3>
         <p data-ru="Сколько стоит нарезка и где проигрывает каждая стратегия поиска — три поломки воспроизведены, а не спрятаны. Ответ проверяется по предложениям: выдуманное число ловится отдельно от неподтверждённой формулировки, а честный отказ засчитывается как обоснованный." data-en="What chunking costs and where each retrieval strategy loses — three failures reproduced rather than hidden. Answers are checked sentence by sentence: an invented number is caught separately from an unsupported phrasing, and an honest refusal counts as grounded.">Сколько стоит нарезка и где проигрывает каждая стратегия поиска — три поломки воспроизведены, а не спрятаны. Ответ проверяется по предложениям: выдуманное число ловится отдельно от неподтверждённой формулировки, а честный отказ засчитывается как обоснованный.</p>
-        <p class="rule"><a href="https://github.com/94spec/rag-grounding-lab" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 168 строк" data-en="→ open the repository · 1 168 lines">→ открыть репозиторий · 1 168 строк</a></p>
+        <p class="rule tested"><a href="https://github.com/94spec/rag-grounding-lab" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 1 168 строк" data-en="→ open the repository · 1 168 lines">→ открыть репозиторий · 1 168 строк</a></p>
+        <p class="den" style="margin-top:8px" data-ru="тесты и CI на Python 3.11 и 3.12" data-en="tests and CI on Python 3.11 and 3.12">тесты и CI на Python 3.11 и 3.12</p>
       </article>
       <article class="card">
         <p class="kicker" data-ru="аналитика на выходах модели" data-en="analytics on model output">аналитика на выходах модели</p>
         <h3>conversation-intelligence-lab</h3>
         <p data-ru="Та же методика, что в разделе аналитики, на синтетических данных: строгий контракт вывода, проверка противоречий, трассируемые помесячные агрегаты и воспроизводимый отчёт." data-en="The methodology from the analytics section, on synthetic data: a strict output contract, contradiction checks, traceable monthly aggregates and a reproducible report.">Та же методика, что в разделе аналитики, на синтетических данных: строгий контракт вывода, проверка противоречий, трассируемые помесячные агрегаты и воспроизводимый отчёт.</p>
-        <p class="rule"><a href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 309 строк" data-en="→ open the repository · 309 lines">→ открыть репозиторий · 309 строк</a></p>
+        <p class="rule tested"><a href="https://github.com/94spec/conversation-intelligence-lab" target="_blank" rel="noopener" data-ru="→ открыть репозиторий · 309 строк" data-en="→ open the repository · 309 lines">→ открыть репозиторий · 309 строк</a></p>
+        <p class="den" style="margin-top:8px" data-ru="тесты и CI на Python 3.11 и 3.12" data-en="tests and CI on Python 3.11 and 3.12">тесты и CI на Python 3.11 и 3.12</p>
+      </article>
+    </div>
+
+    <div class="out">
+<pre>$ ragl compare --top-k 3 --chunking title-prefixed
+
+chunking        retrieval     hit   nDCG  <b>paraphrase  exact-term</b>
+
+title-prefixed  vector        94%  0.836         <b>90%        100%</b>
+title-prefixed  keyword       88%  0.828         <b>80%        100%</b>
+title-prefixed  hybrid       100%  0.882        <b>100%        100%</b></pre>
+      <p class="cap2" data-ru="Реальный вывод из rag-grounding-lab. Последние две колонки — весь смысл: одна усреднённая цифра спрятала бы, что одна стратегия справляется с перефразировками, а другая — с точными идентификаторами. Именно так проверяется решение «на этом объёме гибридный поиск не нужен»: не мнением, а прогоном." data-en="Real output from rag-grounding-lab. The last two columns are the whole point: a single averaged number would hide that one strategy handles paraphrases and the other handles exact identifiers. That is how the decision «hybrid retrieval is not needed at this size» gets checked — by running it, not by asserting it.">Реальный вывод из rag-grounding-lab. Последние две колонки — весь смысл: одна усреднённая цифра спрятала бы, что одна стратегия справляется с перефразировками, а другая — с точными идентификаторами. Именно так проверяется решение «на этом объёме гибридный поиск не нужен»: не мнением, а прогоном.</p>
+    </div>
+
+    <div class="sechd" style="margin:44px 0 26px">
+      <div>
+        <p class="eyebrow" data-ru="как я нахожу свои ошибки" data-en="how i catch my own mistakes">как я нахожу свои ошибки</p>
+        <h2 data-ru="Ошибка находится проверкой, а не глазами" data-en="A mistake is caught by a check, not by looking harder">Ошибка находится проверкой, а не глазами</h2>
+      </div>
+      <p class="eyebrow" data-ru="три случая из этих репозиториев" data-en="three cases from these repositories">три случая из этих репозиториев</p>
+    </div>
+
+    <div class="grid g3">
+      <article class="fix">
+        <p class="kicker" data-ru="статистика" data-en="statistics">статистика</p>
+        <h3 data-ru="Альфа Криппендорфа возвращала не 1.0 при полном согласии" data-en="Krippendorff's alpha did not return 1.0 on perfect agreement">Альфа Криппендорфа возвращала не 1.0 при полном согласии</h3>
+        <p data-ru="В матрице совпадений стояло сравнение тождества строк вместо позиций разметчиков, из-за чего отбрасывались все пары, где оба поставили одинаковую метку. Число получалось правдоподобным и неверным." data-en="The coincidence matrix compared string identity instead of rater positions, so every pair where both raters chose the same label was dropped. The result looked plausible and was wrong.">В матрице совпадений стояло сравнение тождества строк вместо позиций разметчиков, из-за чего отбрасывались все пары, где оба поставили одинаковую метку. Число получалось правдоподобным и неверным.</p>
+        <p class="kept" data-ru="Осталось в репозитории: тест «для двух разметчиков на номинальной шкале α и κ обязаны совпадать». Сейчас 0.7630 против 0.7631." data-en="Kept in the repository: a test asserting that for two raters on a nominal scale alpha and kappa must coincide. Currently 0.7630 against 0.7631.">Осталось в репозитории: тест «для двух разметчиков на номинальной шкале α и κ обязаны совпадать». Сейчас 0.7630 против 0.7631.</p>
+      </article>
+      <article class="fix">
+        <p class="kicker" data-ru="ci" data-en="ci">ci</p>
+        <h3 data-ru="CI не запускал ни одного job'а" data-en="CI ran no jobs at all">CI не запускал ни одного job'а</h3>
+        <p data-ru="Shell-heredoc внутри блока run поставил своё тело в нулевую колонку, а это обрывает блочный скаляр YAML. GitHub не смог прочитать файл: пайплайн выглядел красным, хотя код ни разу не выполнялся." data-en="A shell heredoc inside a run block put its body in column zero, which ends the YAML block scalar. GitHub could not parse the file: the pipeline looked red while the code had never executed.">Shell-heredoc внутри блока run поставил своё тело в нулевую колонку, а это обрывает блочный скаляр YAML. GitHub не смог прочитать файл: пайплайн выглядел красным, хотя код ни разу не выполнялся.</p>
+        <p class="kept" data-ru="Осталось в репозитории: тест структуры workflow — внутри блочного скаляра каждая строка обязана быть глубже ключа, и никаких heredoc. Проверен против сломанного файла." data-en="Kept in the repository: a workflow structure test — inside a block scalar every line must be indented deeper than its key, and no heredocs. Verified against the broken file.">Осталось в репозитории: тест структуры workflow — внутри блочного скаляра каждая строка обязана быть глубже ключа, и никаких heredoc. Проверен против сломанного файла.</p>
+      </article>
+      <article class="fix">
+        <p class="kicker" data-ru="ci" data-en="ci">ci</p>
+        <h3 data-ru="Шаг падал на той самой проверке, которую выполнял" data-en="The step died on the very check it was performing">Шаг падал на той самой проверке, которую выполнял</h3>
+        <p data-ru="GitHub запускает bash с флагом -e, поэтому команда, от которой ожидается ненулевой код возврата, завершала шаг до того, как этот код успевали проверить. В логе стояло «exit code 3» — ровно то число, которое шаг и проверял." data-en="GitHub starts bash with -e, so a command expected to exit non-zero ended the step before the code could be asserted. The log said «exit code 3» — exactly the number the step was checking for.">GitHub запускает bash с флагом -e, поэтому команда, от которой ожидается ненулевой код возврата, завершала шаг до того, как этот код успевали проверить. В логе стояло «exit code 3» — ровно то число, которое шаг и проверял.</p>
+        <p class="kept" data-ru="Осталось в репозитории: хелпер, который печатает ожидаемый и полученный код, и правило — шаг, проверяющий код возврата, обязан отключить errexit." data-en="Kept in the repository: a helper that prints the expected and the actual code, and a rule — a step that asserts on an exit code must disable errexit.">Осталось в репозитории: хелпер, который печатает ожидаемый и полученный код, и правило — шаг, проверяющий код возврата, обязан отключить errexit.</p>
       </article>
     </div>
 
