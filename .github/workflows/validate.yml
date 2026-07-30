@@ -24,7 +24,8 @@ jobs:
         run: |
           set -euo pipefail
           for asset in index.html 404.html og.png favicon.svg robots.txt sitemap.xml .nojekyll \
-                       cv/index.html cv/dmitry-prom-cv-ru.pdf cv/dmitry-prom-cv-en.pdf; do
+                       en/index.html cv/index.html \
+                       cv/dmitry-prom-cv-ru.pdf cv/dmitry-prom-cv-en.pdf; do
             test -s "$asset" || { echo "missing or empty: $asset"; exit 1; }
           done
           test "$(ls fonts/*.woff2 | wc -l)" -ge 6
@@ -37,7 +38,14 @@ jobs:
       - name: Page structure, metadata, anchors and assets
         run: |
           python scripts/check_page.py index.html
+          python scripts/check_page.py en/index.html
           python scripts/check_page.py cv/index.html
+
+      - name: The English page is regenerated from the Russian one
+        run: python scripts/build_en.py --check
+
+      - name: The English page carries English, not attributes
+        run: python scripts/check_translated.py en/index.html
 
       - name: Public links and contacts are wired up
         shell: bash
@@ -48,6 +56,8 @@ jobs:
           grep -Fq 'https://leadchat.online/' index.html
           grep -Fq 'mailto:xpromx94@yandex.ru' index.html
           grep -Fq 'href="/cv/"' index.html
+          grep -Fq 'hreflang="en"' index.html
+          grep -Fq '<loc>https://94spec.github.io/en/</loc>' sitemap.xml
           grep -Fq 'Sitemap: https://94spec.github.io/sitemap.xml' robots.txt
           grep -Fq '<loc>https://94spec.github.io/</loc>' sitemap.xml
           grep -Fq '<loc>https://94spec.github.io/cv/</loc>' sitemap.xml

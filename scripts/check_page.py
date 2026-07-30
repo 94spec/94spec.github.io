@@ -21,7 +21,7 @@ VOID_ELEMENTS = {
 }
 
 REQUIRED_HEAD = (
-    '<html lang="ru"',
+    '<html lang="',
     '<meta name="description"',
     '<link rel="canonical"',
     '<link rel="icon"',

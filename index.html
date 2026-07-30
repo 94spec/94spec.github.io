@@ -10,6 +10,10 @@
 <meta name="theme-color" content="#08090a">
 <link rel="canonical" href="https://94spec.github.io/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="alternate" hreflang="ru" href="https://94spec.github.io/">
+<link rel="alternate" hreflang="en" href="https://94spec.github.io/en/">
+<link rel="alternate" hreflang="x-default" href="https://94spec.github.io/">
 <meta property="og:site_name" content="Дмитрий Пром — AI Engineer &amp; Data Analyst">
 <meta property="og:title" content="Дмитрий Пром — AI Engineer &amp; Data Analyst (LLM-based analytics)">
 <meta property="og:description" content="Production LLM-системы для продаж и аналитика на их данных: контроль качества коммуникаций, voice AI, enterprise RAG, evaluation, экономика моделей.">
@@ -78,6 +82,8 @@ img{max-width:100%;height:auto}
 .nav a{color:var(--muted)}
 .nav a:hover{color:var(--accent)}
 .hdright{display:flex;align-items:center;gap:14px;padding:10px 0}
+.menubtn{display:none;font:inherit;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+         padding:7px 12px;border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer}
 .langbox{display:flex;border:1px solid var(--line2)}
 .langbox button{font:inherit;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
                 padding:6px 10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
@@ -210,7 +216,11 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
   .g5,.g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:720px){
-  .nav{display:none}
+  .menubtn{display:inline-flex}
+  .nav{display:none;order:3;flex-basis:100%;flex-direction:column;gap:0;
+       border-top:1px solid var(--line);padding:6px 0 10px}
+  .nav[data-open="true"]{display:flex}
+  .nav a{padding:11px 2px;font-size:12px;letter-spacing:.1em}
   .g2,.g3,.g4,.g5{grid-template-columns:minmax(0,1fr)}
   h1{font-size:clamp(30px,9vw,46px)}
   .whoami,.facts{word-break:break-word}
@@ -232,19 +242,21 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     <span class="mark" aria-hidden="true">94</span>
     <span>spec / applied-ai</span>
   </a>
-  <nav class="nav" aria-label="Разделы">
+  <nav class="nav" id="nav" aria-label="Разделы">
     <a href="#scale" data-ru="масштаб" data-en="scale">масштаб</a>
     <a href="#measure" data-ru="измерения" data-en="measurement">измерения</a>
-    <a href="#platform" data-ru="платформа" data-en="platform">платформа</a>
+    <a href="#platform" data-ru="контроль качества" data-en="quality control">контроль качества</a>
     <a href="#analytics" data-ru="аналитика" data-en="analytics">аналитика</a>
     <a href="#decisions" data-ru="решения" data-en="trade-offs">решения</a>
     <a href="#leadchat">lead chat</a>
-    <a href="#systems" data-ru="системы" data-en="systems">системы</a>
+    <a href="#voice" data-ru="голос и rag" data-en="voice and rag">голос и rag</a>
     <a href="#code" data-ru="код" data-en="code">код</a>
     <a href="/cv/" data-ru="резюме" data-en="cv">резюме</a>
     <a href="https://github.com/94spec" target="_blank" rel="noopener">github</a>
   </nav>
   <div class="hdright">
+    <button type="button" class="menubtn" id="menu" aria-expanded="false" aria-controls="nav"
+            data-ru="разделы" data-en="sections">разделы</button>
     <div class="langbox" role="group" aria-label="Язык / Language">
       <button type="button" id="lang-ru" aria-pressed="true">ru</button>
       <button type="button" id="lang-en" aria-pressed="false">en</button>
@@ -276,6 +288,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
       <p class="facts">
         <span data-ru="удалённо" data-en="remote">удалённо</span>
         <span>UTC+3</span>
+        <span data-ru="5 лет в разработке, 2 в AI" data-en="5 years in engineering, 2 in AI">5 лет в разработке, 2 в AI</span>
         <span data-ru="рассматриваю зарубеж" data-en="open to teams abroad">рассматриваю зарубеж</span>
         <span>RU / EN</span>
       </p>
@@ -321,8 +334,8 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     <div class="grid g4">
       <div class="cell">
         <p class="num">90</p>
-        <p class="cap" data-ru="production-пайплайнов в конфигурации платформы" data-en="production pipelines in the platform configuration">production-пайплайнов в конфигурации платформы</p>
-        <p class="den" data-ru="объём системы" data-en="system volume">объём системы</p>
+        <p class="cap" data-ru="production-пайплайнов обрабатывают поток без участия человека" data-en="production pipelines running the flow without a human in it">production-пайплайнов обрабатывают поток без участия человека</p>
+        <p class="den" data-ru="знаменатель — сценарии, переведённые в автоматическую обработку" data-en="denominator — scenarios moved to automatic processing">знаменатель — сценарии, переведённые в автоматическую обработку</p>
       </div>
       <div class="cell">
         <p class="num">100%</p>
@@ -355,7 +368,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
         <p class="cap" data-ru="активных чек-листов и конфигураций саммари" data-en="active checklists and summary configurations">активных чек-листов и конфигураций саммари</p>
       </div>
       <div class="cell">
-        <p class="numsm">≥ 1 млн ₽</p>
+        <p class="numsm" data-ru="≥ 1 млн ₽" data-en="≥ 1M RUB">≥ 1 млн ₽</p>
         <p class="cap" data-ru="экономии на контакт-центре в месяц · детали по запросу" data-en="monthly contact-centre saving · details on request">экономии на контакт-центре в месяц · детали по запросу</p>
       </div>
     </div>
@@ -413,7 +426,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
             <td>05</td>
             <td data-ru="Экономия контакт-центра" data-en="Contact-centre saving">Экономия контакт-центра</td>
             <td class="formula" data-ru="стоимость обслуживания того же потока консультаций до и после автоматизации, рублей в месяц" data-en="cost of servicing the same consultation flow before and after automation, RUB per month">стоимость обслуживания того же потока консультаций до и после автоматизации, рублей в месяц</td>
-            <td class="val">≥ 1 млн ₽</td>
+            <td class="val" data-ru="≥ 1 млн ₽" data-en="≥ 1M RUB">≥ 1 млн ₽</td>
           </tr>
         </tbody>
       </table>
@@ -431,7 +444,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
   <div class="sec wrap">
     <div class="sechd">
       <div>
-        <p class="eyebrow">§03 / <span data-ru="флагман 01" data-en="flagship 01">флагман 01</span> · <span data-ru="крупная edtech-платформа (РФ)" data-en="major edtech platform (RU)">крупная edtech-платформа (РФ)</span></p>
+        <p class="eyebrow">§03 / <span data-ru="основной проект" data-en="main project">основной проект</span> · <span data-ru="крупная edtech-платформа (РФ)" data-en="major edtech platform (RU)">крупная edtech-платформа (РФ)</span></p>
         <h2 data-ru="AI-контроль качества всех коммуникаций с клиентом" data-en="AI quality control across every customer communication">AI-контроль качества всех коммуникаций с клиентом</h2>
       </div>
       <p class="eyebrow" data-ru="от ручной выборки к сплошной оценке" data-en="from manual sampling to full coverage">от ручной выборки к сплошной оценке</p>
@@ -476,8 +489,8 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     <p class="lead" style="margin:0 0 26px" data-ru="Вторая половина моей работы начинается там, где заканчивается пайплайн. Задачи приходят от бизнеса как заявки с целью и экономическим обоснованием: «понять, почему упала конверсия», «оценить спрос на программу», «выяснить, зачем к нам приходят действующие клиенты». Я собираю по такой заявке разрез, проверяю выборку и приношу ответ в виде, пригодном для решения: что происходит, чем это подтверждается и чего эти данные не показывают. Отчёты обсуждаются с руководителями направлений и топ-менеджментом, у каждого есть заказчик и оценка полезности." data-en="The second half of my job starts where the pipeline ends. Tasks arrive from the business as tickets with a goal and an economic rationale: 'find out why conversion dropped', 'assess demand for this programme', 'understand why existing customers call sales'. I build the cut, validate the sample and deliver an answer that can be acted on: what is happening, what supports it, and what the data cannot show. Reports are discussed with department heads and top management; each has a stakeholder and a usefulness score.">Вторая половина моей работы начинается там, где заканчивается пайплайн. Задачи приходят от бизнеса как заявки с целью и экономическим обоснованием: «понять, почему упала конверсия», «оценить спрос на программу», «выяснить, зачем к нам приходят действующие клиенты». Я собираю по такой заявке разрез, проверяю выборку и приношу ответ в виде, пригодном для решения: что происходит, чем это подтверждается и чего эти данные не показывают. Отчёты обсуждаются с руководителями направлений и топ-менеджментом, у каждого есть заказчик и оценка полезности.</p>
 
     <div class="grid g4" style="margin-bottom:1px">
-      <div class="cell"><p class="numsm" data-ru="до 3 000" data-en="up to 3,000">до 3 000</p><p class="cap" data-ru="сделок в одном исследовании" data-en="deals in a single study">сделок в одном исследовании</p></div>
-      <div class="cell"><p class="numsm" data-ru="до 6 месяцев" data-en="up to 6 months">до 6 месяцев</p><p class="cap" data-ru="горизонт сравнения периодов" data-en="period-comparison horizon">горизонт сравнения периодов</p></div>
+      <div class="cell"><p class="numsm" data-ru="тысячи" data-en="thousands of">тысячи</p><p class="cap" data-ru="сделок в одном исследовании" data-en="deals in a single study">сделок в одном исследовании</p></div>
+      <div class="cell"><p class="numsm" data-ru="до полугода" data-en="up to six months">до полугода</p><p class="cap" data-ru="горизонт сравнения периодов" data-en="period-comparison horizon">горизонт сравнения периодов</p></div>
       <div class="cell"><p class="numsm" data-ru="десятки признаков" data-en="dozens of features">десятки признаков</p><p class="cap" data-ru="на сделку в глубоком разборе" data-en="per deal in a deep-dive study">на сделку в глубоком разборе</p></div>
       <div class="cell"><p class="numsm" data-ru="все каналы" data-en="every channel">все каналы</p><p class="cap" data-ru="звонки и переписка всех сотрудников, кто общается с клиентом" data-en="calls and chats of every employee who talks to customers">звонки и переписка всех сотрудников, кто общается с клиентом</p></div>
     </div>
@@ -513,7 +526,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
 
     <div class="grid g2" style="margin-top:1px">
       <div class="card">
-        <p class="kicker" data-ru="правила, которые я не нарушаю" data-en="rules I do not break">правила, которые я не нарушаю</p>
+        <p class="kicker" data-ru="обязательная часть любого отчёта" data-en="in every report, without exception">обязательная часть любого отчёта</p>
         <ul class="list">
           <li data-ru="Контроль выборки: сколько записей вошло, сколько потеряно и почему — до всех процентов." data-en="Sample control: how many records were included, how many were lost and why — before any percentages.">Контроль выборки: сколько записей вошло, сколько потеряно и почему — до всех процентов.</li>
           <li data-ru="Знаменатель у каждой доли, и при сравнении периодов он один и тот же." data-en="A denominator for every share, and the same one when periods are compared.">Знаменатель у каждой доли, и при сравнении периодов он один и тот же.</li>
@@ -546,9 +559,9 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     <div class="grid g2">
       <article class="card">
         <p class="kicker">stt</p>
-        <h3 data-ru="Управляемый STT вместо своего Whisper" data-en="Managed STT instead of self-hosted Whisper">Управляемый STT вместо своего Whisper</h3>
+        <h3 data-ru="Готовый сервис распознавания вместо своего Whisper" data-en="A managed speech service instead of self-hosted Whisper">Готовый сервис распознавания вместо своего Whisper</h3>
         <div class="vs">
-          <div class="pick" data-ru="Взял <b>управляемый сервис</b>: качество на спонтанной телефонной речи и разделение говорящих из коробки, предсказуемая цена за минуту, ноль эксплуатации." data-en="Chose <b>a managed service</b>: quality on spontaneous phone speech and speaker separation out of the box, predictable per-minute price, zero operations.">Взял <b>управляемый сервис</b>: качество на спонтанной телефонной речи и разделение говорящих из коробки, предсказуемая цена за минуту, ноль эксплуатации.</div>
+          <div class="pick" data-ru="Взял <b>готовый сервис</b>: качество на спонтанной телефонной речи и разделение говорящих из коробки, предсказуемая цена за минуту и никакой эксплуатации — ни своего железа, ни дежурств." data-en="Chose <b>a managed service</b>: quality on spontaneous phone speech and speaker separation out of the box, a predictable per-minute price, and nothing to operate — no hardware, no on-call.">Взял <b>готовый сервис</b>: качество на спонтанной телефонной речи и разделение говорящих из коробки, предсказуемая цена за минуту и никакой эксплуатации — ни своего железа, ни дежурств.</div>
           <div class="alt" data-ru="Отказался от своего Whisper на GPU: дешевле на объёме, но это железо, очередь, дежурство и просадка качества на шумных линиях, которую пришлось бы чинить самому." data-en="Turned down self-hosted Whisper on GPU: cheaper at volume, but that means hardware, a queue, on-call duty and quality loss on noisy lines that I would have to fix myself.">Отказался от своего Whisper на GPU: дешевле на объёме, но это железо, очередь, дежурство и просадка качества на шумных линиях, которую пришлось бы чинить самому.</div>
         </div>
         <p class="rule" data-ru="Пересмотрю, когда объём сделает разницу в цене больше стоимости эксплуатации: тогда гибрид — массовый поток на своём, сложные записи в облако." data-en="I will revisit it when volume makes the price gap larger than the cost of operations: then a hybrid — bulk traffic in-house, hard recordings in the cloud.">Пересмотрю, когда объём сделает разницу в цене больше стоимости эксплуатации: тогда гибрид — массовый поток на своём, сложные записи в облако.</p>
@@ -590,19 +603,30 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
   <div class="sec wrap">
     <div class="sechd">
       <div>
-        <p class="eyebrow">§06 / <span data-ru="флагман 02" data-en="flagship 02">флагман 02</span> · <span data-ru="независимый saas" data-en="independent saas">независимый saas</span> · leadchat.online</p>
+        <p class="eyebrow">§06 / <span data-ru="собственный продукт" data-en="my own product">собственный продукт</span> · <span data-ru="независимый saas" data-en="independent saas">независимый saas</span> · leadchat.online</p>
         <h2 data-ru="Lead Chat: AI-платформа продаж с оплатой за результат" data-en="Lead Chat: a pay-per-result AI sales platform">Lead Chat: AI-платформа продаж с оплатой за результат</h2>
       </div>
       <p class="eyebrow accent" data-ru="50 ₽ за созданный лид — не за сообщения" data-en="50 ₽ per created lead — not per message">50 ₽ за созданный лид — не за сообщения</p>
     </div>
 
-    <p class="lead" style="margin:0 0 26px" data-ru="Собственный продукт, а не демо: агент ведёт диалог по бизнес-цели, квалифицирует клиента, отрабатывает возражения, отвечает по базе знаний и совершает действия — записывает, собирает контакт, отдаёт лид в CRM. Оплата за результат задаёт всю архитектуру: пока «лид» не определён технически, брать за него деньги нельзя. Поэтому лид засчитывается не за состоявшийся диалог, а когда агент собрал обязательные поля и они прошли валидацию, — и из этого следует остальное: у агента есть цель, этапы и проверка полноты данных перед закрытием. Я отвечаю за продуктовую концепцию, AI-логику и ключевую архитектуру. С технической стороны со мной работает партнёр-разработчик: отдельные компоненты и тестирование кода. Продуктовые метрики закрыты и обсуждаются отдельно." data-en="A real product, not a demo: the agent runs a goal-driven dialogue, qualifies the customer, handles objections, answers from the knowledge base and takes actions — books, captures the contact, pushes the lead into CRM. Pay-per-result dictates the architecture: you cannot charge for a lead until a lead is defined in code. So a lead counts not when a dialogue happened, but when the agent has captured the required fields and they passed validation — and the rest follows: the agent has a goal, stages, and a completeness check before it closes. I own the product concept, AI logic and core architecture. A development partner works with me on the technical side: selected components and code testing. Product metrics are confidential and discussed separately.">Собственный продукт, а не демо: агент ведёт диалог по бизнес-цели, квалифицирует клиента, отрабатывает возражения, отвечает по базе знаний и совершает действия — записывает, собирает контакт, отдаёт лид в CRM. Оплата за результат задаёт всю архитектуру: пока «лид» не определён технически, брать за него деньги нельзя. Поэтому лид засчитывается не за состоявшийся диалог, а когда агент собрал обязательные поля и они прошли валидацию, — и из этого следует остальное: у агента есть цель, этапы и проверка полноты данных перед закрытием. Я отвечаю за продуктовую концепцию, AI-логику и ключевую архитектуру. С технической стороны со мной работает партнёр-разработчик: отдельные компоненты и тестирование кода. Продуктовые метрики закрыты и обсуждаются отдельно.</p>
+    <p class="lead" style="margin:0 0 26px" data-ru="Собственный продукт, а не демо: агент ведёт диалог по бизнес-цели, квалифицирует клиента, отрабатывает возражения, отвечает по базе знаний и совершает действия — записывает, собирает контакт, отдаёт лид в CRM." data-en="A real product, not a demo: the agent runs a goal-driven dialogue, qualifies the customer, handles objections, answers from the knowledge base and takes actions — books, captures the contact, pushes the lead into CRM.">Собственный продукт, а не демо: агент ведёт диалог по бизнес-цели, квалифицирует клиента, отрабатывает возражения, отвечает по базе знаний и совершает действия — записывает, собирает контакт, отдаёт лид в CRM.</p>
 
     <div class="grid g4">
       <div class="cell"><h3 data-ru="База знаний" data-en="Knowledge base">База знаний</h3><p class="cap" data-ru="Сайты и офисные файлы нормализуются в чанки и эмбеддинги, индексируются в pgvector с ключевым поиском как запасным вариантом." data-en="Websites and office files are normalised into chunks and embeddings, indexed in pgvector with keyword search as a fallback.">Сайты и офисные файлы нормализуются в чанки и эмбеддинги, индексируются в pgvector с ключевым поиском как запасным вариантом.</p></div>
       <div class="cell"><h3 data-ru="Ядро агента" data-en="Agent runtime">Ядро агента</h3><p class="cap" data-ru="Бизнес-цель, этапы диалога, квалификация, возражения, опора на источники и ограничения поведения. История не уезжает в контекст целиком: свежие реплики — дословно, ранние — сжатым состоянием диалога и собранными полями, иначе стоимость и задержка растут с каждой репликой." data-en="Business goal, dialogue stages, qualification, objections, grounding and behavioural limits. History does not go into context wholesale: recent turns verbatim, earlier ones compressed into dialogue state and captured fields — otherwise cost and latency grow with every turn.">Бизнес-цель, этапы диалога, квалификация, возражения, опора на источники и ограничения поведения. История не уезжает в контекст целиком: свежие реплики — дословно, ранние — сжатым состоянием диалога и собранными полями, иначе стоимость и задержка растут с каждой репликой.</p></div>
       <div class="cell"><h3 data-ru="Действия и интеграции" data-en="Actions &amp; integrations">Действия и интеграции</h3><p class="cap" data-ru="Вызов функций для сбора лида, онлайн-записи и бизнес-действий; amoCRM, Bitrix24, Telegram, email." data-en="Function calling for lead capture, online booking and business actions; amoCRM, Bitrix24, Telegram, email.">Вызов функций для сбора лида, онлайн-записи и бизнес-действий; amoCRM, Bitrix24, Telegram, email.</p></div>
       <div class="cell"><h3 data-ru="Платформа и биллинг" data-en="Platform &amp; billing">Платформа и биллинг</h3><p class="cap" data-ru="Веб-виджет, фоновые задачи, биллинг по результату и аналитика конверсии." data-en="Web widget, background jobs, result-based billing and conversion analytics.">Веб-виджет, фоновые задачи, биллинг по результату и аналитика конверсии.</p></div>
+    </div>
+
+    <div class="grid g2" style="margin:1px 0 0">
+      <div class="card">
+        <p class="kicker" data-ru="почему архитектура именно такая" data-en="why the architecture is what it is">почему архитектура именно такая</p>
+        <p data-ru="Оплата за результат задаёт всё остальное: пока «лид» не определён технически, брать за него деньги нельзя. Лид засчитывается не за состоявшийся диалог, а когда агент собрал обязательные поля и они прошли валидацию. Отсюда и цель у диалога, и этапы, и проверка полноты данных перед закрытием." data-en="Pay-per-result dictates the rest: you cannot charge for a lead until a lead is defined in code. A lead counts not when a dialogue happened, but when the agent has captured the required fields and they passed validation. That is where the goal, the stages and the completeness check before closing come from.">Оплата за результат задаёт всё остальное: пока «лид» не определён технически, брать за него деньги нельзя. Лид засчитывается не за состоявшийся диалог, а когда агент собрал обязательные поля и они прошли валидацию. Отсюда и цель у диалога, и этапы, и проверка полноты данных перед закрытием.</p>
+      </div>
+      <div class="card">
+        <p class="kicker" data-ru="кто что делает" data-en="who does what">кто что делает</p>
+        <p data-ru="Я отвечаю за продуктовую концепцию, AI-логику и ключевую архитектуру. С технической стороны со мной работает партнёр-разработчик: отдельные компоненты и тестирование кода. Продуктовые метрики закрыты — разбираю их отдельно." data-en="I own the product concept, the AI logic and the core architecture. A development partner works with me on the technical side: selected components and code testing. Product metrics are confidential — I go through them separately.">Я отвечаю за продуктовую концепцию, AI-логику и ключевую архитектуру. С технической стороны со мной работает партнёр-разработчик: отдельные компоненты и тестирование кода. Продуктовые метрики закрыты — разбираю их отдельно.</p>
+      </div>
     </div>
 
     <div class="chips" style="margin-top:22px">
@@ -620,29 +644,31 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     <div class="sechd">
       <div>
         <p class="eyebrow">§07 / production-<span data-ru="системы" data-en="systems">системы</span></p>
-        <h2 data-ru="Промт — это один компонент из десяти" data-en="A prompt is one component out of ten">Промт — это один компонент из десяти</h2>
+        <h2 data-ru="Голосовой агент, корпоративный RAG, оценка и экономика моделей" data-en="A voice agent, enterprise RAG, evaluation and model economics">Голосовой агент, корпоративный RAG, оценка и экономика моделей</h2>
       </div>
-      <p class="eyebrow" data-ru="голос · rag · оценка · экономика" data-en="voice · rag · evaluation · economics">голос · rag · оценка · экономика</p>
+      <p class="eyebrow" data-ru="промт — один компонент из десяти" data-en="a prompt is one component out of ten">промт — один компонент из десяти</p>
     </div>
 
     <div class="grid g2">
-      <article class="card">
+      <article class="card" id="voice">
         <p class="kicker">voice ai</p>
         <p class="num">45–50%</p>
         <p class="cap" data-ru="подходящих типовых консультаций проходит без оператора" data-en="of eligible routine consultations run without an operator">подходящих типовых консультаций проходит без оператора</p>
         <p style="margin-top:14px" data-ru="Перевёл регламент контакт-центра в живой диалог: ветвление по скрипту, уточнения, перебивания, ответы из базы знаний. Подключён к телефонии Сипуни, держит 10 линий одновременно, работает круглосуточно и не зависит от того, какой менеджер взял трубку." data-en="I turned the contact-centre policy into a live dialogue: script branching, clarifications, barge-in, answers from the knowledge base. Connected to Sipuni telephony, it holds 10 concurrent lines, works around the clock and does not depend on which rep picked up.">Перевёл регламент контакт-центра в живой диалог: ветвление по скрипту, уточнения, перебивания, ответы из базы знаний. Подключён к телефонии Сипуни, держит 10 линий одновременно, работает круглосуточно и не зависит от того, какой менеджер взял трубку.</p>
         <p class="rule" data-ru="Задержка — главный ограничитель канала: 3 секунды до первой реплики и до 10 секунд между репликами. Она складывается из распознавания речи, запроса к модели с контекстом скрипта и базы знаний и синтеза ответа, и сокращается не выбором модели, а тем, как рано начинается распознавание и сколько контекста уходит в запрос. Перебивания и удержание ветки диалога заданы системным промтом, а не отдельной машиной состояний: правки регламента выходят без релиза, но вся политика диалога живёт в одном контракте, поэтому её изменения проходят через evaluation так же, как код. Отсюда ×1,2 квалифицированных лидов в первый месяц и экономия от 1 млн ₽ в месяц: больше дозвонов, круглосуточная работа, полный охват скрипта и стабильное знание продукта." data-en="Latency is the binding constraint of the channel: 3 seconds to the first reply, up to 10 seconds between replies. It is the sum of speech recognition, one model call carrying the script and knowledge-base context, and speech synthesis — and it shrinks not by swapping the model but by how early recognition starts and how much context the request carries. Barge-in and dialogue-branch control live in the system prompt rather than a separate state machine: policy edits ship without a release, but the whole dialogue policy sits in one contract, so its changes go through evaluation exactly like code. Hence ×1.2 qualified leads in month one and a saving from 1M RUB per month: more answered calls, round-the-clock coverage, full script coverage and consistent product knowledge.">Задержка — главный ограничитель канала: 3 секунды до первой реплики и до 10 секунд между репликами. Она складывается из распознавания речи, запроса к модели с контекстом скрипта и базы знаний и синтеза ответа, и сокращается не выбором модели, а тем, как рано начинается распознавание и сколько контекста уходит в запрос. Перебивания и удержание ветки диалога заданы системным промтом, а не отдельной машиной состояний: правки регламента выходят без релиза, но вся политика диалога живёт в одном контракте, поэтому её изменения проходят через evaluation так же, как код. Отсюда ×1,2 квалифицированных лидов в первый месяц и экономия от 1 млн ₽ в месяц: больше дозвонов, круглосуточная работа, полный охват скрипта и стабильное знание продукта.</p>
+        <p class="rule"><a href="https://github.com/94spec/voice-agent-runtime" target="_blank" rel="noopener" data-ru="→ рантайм такого диалога: этапы, перебивания, бюджет задержки" data-en="→ the runtime behind a dialogue like this: stages, barge-in, latency budget">→ рантайм такого диалога: этапы, перебивания, бюджет задержки</a></p>
       </article>
 
-      <article class="card">
+      <article class="card" id="rag">
         <p class="kicker" data-ru="корпоративный rag" data-en="enterprise rag">корпоративный rag</p>
         <p class="num">100+</p>
         <p class="cap" data-ru="ежедневных внутренних пользователей" data-en="daily internal users">ежедневных внутренних пользователей</p>
-        <p style="margin-top:14px" data-ru="Два ассистента на Dify — по продажам и по корпоративной документации, 37 документов в базе, поиск чисто векторный. Отвечал за нарезку документов, сборку контекста, опору на источники и качество ответа. Сотрудник получает ответ со ссылкой на документ меньше чем за 10 секунд вместо примерно пяти минут ручного поиска." data-en="Two Dify assistants — one for sales, one for corporate documentation, 37 documents in the base, purely vector retrieval. I owned chunking, context assembly, grounding and answer quality. An employee gets an answer with a source link in under 10 seconds instead of roughly five minutes of manual search.">Два ассистента на Dify — по продажам и по корпоративной документации, 37 документов в базе, поиск чисто векторный. Отвечал за нарезку документов, сборку контекста, опору на источники и качество ответа. Сотрудник получает ответ со ссылкой на документ меньше чем за 10 секунд вместо примерно пяти минут ручного поиска.</p>
+        <p style="margin-top:14px" data-ru="Два ассистента на Dify — по продажам и по корпоративной базе в Confluence, 37 документов, поиск чисто векторный. Отвечал за нарезку документов, сборку контекста, опору на источники и качество ответа. Сотрудник получает ответ со ссылкой на документ меньше чем за 10 секунд вместо примерно пяти минут ручного поиска." data-en="Two Dify assistants — one for sales, one over the corporate Confluence base, 37 documents, purely vector retrieval. I owned chunking, context assembly, grounding and answer quality. An employee gets an answer with a source link in under 10 seconds instead of roughly five minutes of manual search.">Два ассистента на Dify — по продажам и по корпоративной базе в Confluence, 37 документов, поиск чисто векторный. Отвечал за нарезку документов, сборку контекста, опору на источники и качество ответа. Сотрудник получает ответ со ссылкой на документ меньше чем за 10 секунд вместо примерно пяти минут ручного поиска.</p>
+        <p class="rule"><a href="https://github.com/94spec/rag-grounding-lab" target="_blank" rel="noopener" data-ru="→ сравнение стратегий поиска и проверка обоснованности ответа" data-en="→ retrieval strategies compared and answer grounding checked">→ сравнение стратегий поиска и проверка обоснованности ответа</a></p>
         <p class="rule" data-ru="Гибридный поиск здесь не нужен: ключевые слова дают выигрыш, когда в запросах появляются точные артикулы, номера версий и редкие термины, — на корпусе такого размера он добавил бы сложность без результата. Основная работа не в модели, а в подготовке документов и в том, чтобы ассистент честно говорил «в документах этого нет»." data-en="Hybrid retrieval is not needed here: keyword matching pays off once queries carry exact part numbers, version strings and rare terms — on a corpus this size it would add complexity without a result. The real work is not the model but document preparation, and making the assistant honestly say 'this is not in the documents'.">Гибридный поиск здесь не нужен: ключевые слова дают выигрыш, когда в запросах появляются точные артикулы, номера версий и редкие термины, — на корпусе такого размера он добавил бы сложность без результата. Основная работа не в модели, а в подготовке документов и в том, чтобы ассистент честно говорил «в документах этого нет».</p>
       </article>
 
-      <article class="card">
+      <article class="card" id="evaluation">
         <p class="kicker" data-ru="оценка llm" data-en="llm evaluation">оценка llm</p>
         <p class="num">4</p>
         <p class="cap" data-ru="специализированных golden set" data-en="task-specific golden sets">специализированных golden set</p>
@@ -650,7 +676,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
         <p class="rule tested"><a href="https://github.com/94spec/llm-evaluation-harness" target="_blank" rel="noopener" data-ru="→ методика и код в публичном репозитории" data-en="→ methodology and code in the public repository">→ методика и код в публичном репозитории</a></p>
       </article>
 
-      <article class="card">
+      <article class="card" id="economics">
         <p class="kicker" data-ru="экономика моделей" data-en="model economics">экономика моделей</p>
         <p class="num">−88%</p>
         <p class="cap" data-ru="стоимости ключевого LLM-сценария" data-en="of the key LLM scenario cost">стоимости ключевого LLM-сценария</p>
@@ -667,7 +693,7 @@ td.val{color:var(--accent);white-space:nowrap;font-weight:700}
     <div class="sechd">
       <div>
         <p class="eyebrow">§08 / <span data-ru="метод и стек" data-en="method and stack">метод и стек</span></p>
-        <h2 data-ru="Один владелец пути от регламента до решения" data-en="One owner from policy to decision">Один владелец пути от регламента до решения</h2>
+        <h2 data-ru="Один человек отвечает за весь путь: от регламента до решения" data-en="One person owns the whole path: from policy to decision">Один человек отвечает за весь путь: от регламента до решения</h2>
       </div>
     </div>
 
@@ -836,10 +862,6 @@ title-prefixed  hybrid       100%  0.882        <b>100%        100%</b></pre>
       <a class="btn" href="https://github.com/94spec" target="_blank" rel="noopener">github.com/94spec</a>
       <a class="btn" href="/cv/" data-ru="Резюме и PDF" data-en="CV and PDF">Резюме и PDF</a>
       <a class="btn" href="https://leadchat.online/" target="_blank" rel="noopener">leadchat.online</a>
-      <!-- Чтобы добавить Telegram или hh: раскомментируй нужную строку и подставь свой адрес.
-      <a class="btn" href="https://t.me/USERNAME" target="_blank" rel="noopener">telegram</a>
-      <a class="btn" href="https://hh.ru/resume/ID" target="_blank" rel="noopener">резюме на hh</a>
-      -->
     </div>
   </div>
 </section>
@@ -850,6 +872,7 @@ title-prefixed  hybrid       100%  0.882        <b>100%        100%</b></pre>
   <span>© 2026 <span data-ru="Дмитрий Пром" data-en="Dmitry Prom">Дмитрий Пром</span></span>
   <span data-ru="ai engineer &amp; data analyst · удалённо · utc+3" data-en="ai engineer &amp; data analyst · remote · utc+3">ai engineer &amp; data analyst · удалённо · utc+3</span>
   <a href="mailto:xpromx94@yandex.ru">xpromx94@yandex.ru</a>
+  <span data-ru="обновлено 30 июля 2026" data-en="updated 30 july 2026">обновлено 30 июля 2026</span>
 </footer>
 
 <script>
@@ -870,6 +893,23 @@ title-prefixed  hybrid       100%  0.882        <b>100%        100%</b></pre>
     enBtn.setAttribute("aria-pressed", String(lang === "en"));
     try { localStorage.setItem("lang", lang); } catch (e) {}
   }
+
+  var menuBtn = document.getElementById("menu");
+  var nav = document.getElementById("nav");
+  function setMenu(open) {
+    nav.setAttribute("data-open", String(open));
+    menuBtn.setAttribute("aria-expanded", String(open));
+  }
+  menuBtn.addEventListener("click", function () {
+    setMenu(nav.getAttribute("data-open") !== "true");
+  });
+  // A menu that stays open over the section you just chose is worse than none.
+  nav.addEventListener("click", function (event) {
+    if (event.target.tagName === "A") setMenu(false);
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") setMenu(false);
+  });
 
   ruBtn.addEventListener("click", function () { apply("ru"); });
   enBtn.addEventListener("click", function () { apply("en"); });
