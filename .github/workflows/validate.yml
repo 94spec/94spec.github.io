@@ -68,7 +68,7 @@ jobs:
           set -euo pipefail
           # Content must live in the HTML itself: crawlers and link previews
           # do not execute scripts. Fail if the body is just a loader.
-          grep -Fq 'AI Engineer &amp; Data Analyst' index.html
+          grep -Fq '>Дмитрий Пром · ' index.html
           grep -Fq 'аналитика, по которой принимают решения' index.html
           ! grep -Fq 'This page requires JavaScript' index.html
 
