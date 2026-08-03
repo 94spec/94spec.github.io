@@ -38,9 +38,11 @@ HEAD_SWAPS = [
     ('<meta property="og:locale:alternate" content="en_US">',
      '<meta property="og:locale:alternate" content="ru_RU">'),
     ("<title>Дмитрий Пром — резюме", "<title>Dmitry Prom — CV"),
+    ('<meta property="og:site_name" content="Дмитрий Пром',
+     '<meta property="og:site_name" content="Dmitry Prom'),
 ]
 
-EN_TITLE = "Dmitry Prom — AI Engineer &amp; Data Analyst (LLM-based analytics)"
+EN_TITLE = "Dmitry Prom — AI Engineer / LLM Engineer"
 EN_DESCRIPTION = ("I build production LLM systems for commercial processes and do the analysis "
                   "on the data they produce: quality control across customer communications, "
                   "voice AI, enterprise RAG, evaluation and model economics.")
